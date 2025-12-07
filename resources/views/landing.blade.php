@@ -51,7 +51,7 @@
             <a href="/" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <span class="text-primary">
-                  <img src="img/logo_v3.png" alt="" width="64" height="64" />
+                  <img src="img/logo.png" alt="" width="64" height="64" />
                 </span>
               </span>
               <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">PathXAI</span>

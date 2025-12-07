@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 Route::get('/predict', function () {
-    return view('predict');
+    return view('predictV2');
 });
 
 
