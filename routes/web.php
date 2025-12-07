@@ -19,6 +19,9 @@ Route::get('/predict', function () {
 // Predict POST Rotaları
 
 Route::post('/predict/hcd', [PredictController::class, 'predictHCD'])->name('predictHCD'); // HCD - Metastaz Meme Kanseri (Lenf Nodu)
+Route::post('/predict/breast', [PredictController::class, 'predictBreast'])->name('predictBreast'); 
+Route::post('/predict/lung', [PredictController::class, 'predictLung'])->name('predictLung'); 
+Route::post('/predict/colon', [PredictController::class, 'predictColon'])->name('predictColon'); 
 
 
 

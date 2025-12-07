@@ -169,17 +169,21 @@
           <p class="text-center mb-12 pb-md-4">Görüntü hangi dokuya ait ise ilgili modeli seçmeniz gerekmektedir.</p>
           <div class="row g-6">
             <div class="col-lg-5">
-              <div class="contact-img-box position-relative border p-2 h-100" style="border-radius: 0;">
-                <img id="imgRes" src="/img/placeholder.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" style="border-radius: 0;">
-                <div class="p-4 pb-2">
-                  <div class="row g-4">
-                    <div class="col-12">
-                      <div class="d-flex align-items-center">
-                        <div class="badge bg-label-primary rounded p-1_5 me-3">
-                          <i class="icon-base ti tabler-upload icon-lg"></i>
-                        </div>
-                        <div>
-                          <p class="mb-0">Görsel Yükleyin</p>
+              <div class="card card-contact h-100">
+                <div class="card-body p-3">
+                  <div class="contact-img-box position-relative border p-2 h-100" style="border-radius: 0;">
+                    <img id="imgRes" src="/img/placeholder.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" style="border-radius: 0;">
+                    <div class="p-4 pb-2">
+                      <div class="row g-4">
+                        <div class="col-12">
+                          <div class="d-flex align-items-center">
+                            <div class="badge bg-label-primary rounded p-1_5 me-3">
+                              <i class="icon-base ti tabler-upload icon-lg"></i>
+                            </div>
+                            <div>
+                              <p class="mb-0">Görsel Yükleyin</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -244,7 +248,7 @@
                               <div class="card-body d-flex justify-content-between align-items-center">
                                 <div class="card-title mb-0">
                                   <h5 class="mb-1 me-2" id="pozitif">86% Poizitif</h5>
-                                  <p class="mb-0">(Kanser Dokusu İçerir)</p>
+                                  <p class="mb-0" id="pozitifSub">(Kanser Dokusu İçerir)</p>
                                 </div>
                                 <div class="card-icon">
                                   <span class="badge bg-label-danger rounded p-2">
@@ -257,7 +261,7 @@
                               <div class="card-body d-flex justify-content-between align-items-center">
                                 <div class="card-title mb-0">
                                   <h5 class="mb-1 me-2" id="negatif">14% Negatif</h5>
-                                  <p class="mb-0">(Kanser Dokusu İçermez)</p>
+                                  <p class="mb-0" id="negatifSub">(Kanser Dokusu İçermez)</p>
                                 </div>
                                 <div class="card-icon">
                                   <span class="badge bg-label-success rounded p-2">
@@ -530,9 +534,25 @@
           let formData = new FormData();
           formData.append("_token", $("input[name='_token']").val());
           formData.append("image", selectedImage);
+          formData.append("aiModel", $("#aiModel").val());   // 🔥 EKSİK OLAN BUYDU
 
-          // Şimdilik HCD route’u
-          let url = "{{ route('predictHCD') }}";
+          console.log(formData.get('aiModel'));
+
+          let url;
+
+          if(formData.get("aiModel") == 'breast') {
+              url = "{{ route('predictBreast') }}";
+          }
+          else if(formData.get("aiModel") == 'lung') {
+              url = "{{ route('predictLung') }}";
+          }
+          else if(formData.get("aiModel") == 'colon') {
+              url = "{{ route('predictColon') }}";
+          }
+          else if(formData.get("aiModel") == 'hcd') {
+              url = "{{ route('predictHCD') }}";
+          }
+          
 
           $.ajax({
               url: url,
@@ -559,14 +579,42 @@
                       $("#imgRes").attr("src", res.image_url.replace("..", "")); 
                       // "../img/..." → "/img/..." dönüşümü
                   }
-                  // Pozitif (%)
-                  if (res.positive !== undefined) {
-                      $("#pozitif").text(res.positive + "% Pozitif");
+
+                  // 🔥 LUNG MODEL İÇİN ÖZEL HESAPLAMA
+                  if (res.probabilities) {
+
+                      let aca = res.probabilities.ACA || 0;
+                      let scc = res.probabilities.SCC || 0;
+                      let normal = res.probabilities.NORMAL || 0;
+
+                      let positive = aca + scc; // ACA + SCC
+                      let negative = normal;    // NORMAL
+
+                      // Card 1 — Pozitif
+                      $("#pozitif").text(positive.toFixed(2) + "% Pozitif");
+                      $("#pozitifSub").text(`ACA: ${aca.toFixed(2)}% — SCC: ${scc.toFixed(2)}%`);
+
+                      // Card 2 — Negatif
+                      $("#negatif").text(negative.toFixed(2) + "% Negatif");
+                      $("#negatifSub").text(`Normal Doku: ${normal.toFixed(2)}%`);
                   }
-                  // Negatif (%)
-                  if (res.negative !== undefined) {
-                      $("#negatif").text(res.negative + "% Negatif");
+                  else{
+                    // Pozitif (%)
+                    if (res.positive !== undefined) {
+                        $("#pozitif").text(res.positive + "% Pozitif");
+                        $("#pozitifSub").text(`(Kanser Dokusu İçerir)`);
+
+                    }
+                    // Negatif (%)
+                    if (res.negative !== undefined) {
+                        $("#negatif").text(res.negative + "% Negatif");
+                        $("#negatifSub").text(`(Kanser Dokusu İçermez)`);
+
+                    }
                   }
+
+
+
                   // Sonuç bölümünü göster
                   $("#resultSection").removeClass("d-none");
               },
