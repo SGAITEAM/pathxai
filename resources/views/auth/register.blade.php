@@ -4,24 +4,22 @@
 
 @section('content')
 <div class="authentication-wrapper authentication-basic container-p-y">
-  <div class="authentication-inner py-4">
+  <div class="authentication-inner py-6 mt-6">
     <!-- Register Card -->
     <div class="card">
       <div class="card-body">
-
         <!-- Logo -->
         <div class="app-brand justify-content-center mb-4">
           <a href="{{ url('/') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="{{ asset('assets/img/app-logo.png') }}" height="64" alt="Logo">
+              <img src="{{ asset('/img/logo.png') }}" height="64" alt="Logo">
             </span>
-            <span class="app-brand-text demo text-heading ms-2">MenuMood</span>
+            <span class="app-brand-text demo text-heading ms-2">PathXAI</span>
           </a>
         </div>
         <!-- /Logo -->
 
         <h4 class="mb-1 text-center">{{ __('Register Now') }}</h4>
-        <p class="mb-4 text-center">{{ __('15 Gün Ücretsiz Kullanmaya Başlayın 🚀') }}</p>
 
         <!-- Register Form -->
         <form method="POST" action="{{ route('register') }}">
@@ -41,7 +39,7 @@
             @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
           </div>
         
-          <!-- Phone -->
+          {{-- <!-- Phone -->
           <div class="mb-3">
             <label for="phone" class="form-label">{{ __('Phone') }}</label>
             <input id="phone" type="text"
@@ -55,7 +53,7 @@
             <label for="brand" class="form-label">{{ __('Brand') }}</label>
             <input id="brand" type="text" class="form-control @error('brand') is-invalid @enderror" name="brand" value="{{ old('brand') }}" required />
             @error('brand') <div class="invalid-feedback">{{ $message }}</div> @enderror
-          </div>
+          </div> --}}
         
           <!-- Password -->
           <div class="mb-3 form-password-toggle">
@@ -85,9 +83,9 @@
           @endif --}}
         
           <!-- Reg Phrase -->
-          <div class="mb-3" style="font-size: 11px; text-align: justify; color:#6d6b78;">
+          {{-- <div class="mb-3" style="font-size: 11px; text-align: justify; color:#6d6b78;">
             <i class="ti tabler-exclamation-circle" style="font-size: 15px"></i> {!! __('RegPhrase') !!} 
-          </div>
+          </div> --}}
         
           <button type="submit" class="btn btn-primary d-grid w-100">{{ __('Register') }}</button>
         </form>

@@ -7,7 +7,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>@yield('title', 'Login') - MenuMood</title>
+  <title>@yield('title', 'Login') - PathXAI</title>
   <meta name="description" content="" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -49,10 +49,10 @@
     <a href="/login" class="app-brand auth-cover-brand">
         <span class="app-brand-logo demo">
           <span class="text-primary">
-            <img src="{{ asset('assets/img/app-logo.png') }}" alt="MenuMood" width="32" height="32">
+            <img src="{{ asset('/img/logo.png') }}" alt="PathXAI" width="32" height="32">
           </span>
         </span>
-        <span class="app-brand-text demo text-heading">MenuMood</span>
+        <span class="app-brand-text demo text-heading">PathXAI</span>
       </a>
     <!-- /Logo -->
 

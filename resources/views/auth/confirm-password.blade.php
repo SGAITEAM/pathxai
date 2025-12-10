@@ -13,9 +13,9 @@
         <div class="app-brand justify-content-center mb-4">
           <a href="{{ url('/') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="{{ asset('assets/img/app-logo.png') }}" height="64" alt="Logo">
+              <img src="{{ asset('/img/logo.png') }}" height="64" alt="Logo">
             </span>
-            <span class="app-brand-text demo text-heading ms-2">MenuMood</span>
+            <span class="app-brand-text demo text-heading ms-2">PathXAI</span>
           </a>
         </div>
 

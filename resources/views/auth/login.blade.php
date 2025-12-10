@@ -22,9 +22,9 @@
         <div class="app-brand mb-4 text-center">
           <a href="{{ url('/') }}" class="app-brand-link gap-2 text-center">
             <span class="app-brand-logo demo ">
-              <img src="{{ asset('assets/img/app-logo.png') }}" alt="Logo" height="64" width="64">
+              <img src="{{ asset('/img/logo.png') }}" alt="Logo" height="64" width="64">
             </span>
-            <h1 class="mb-0 display-5">MenuMood</h1>
+            <h1 class="mb-0 display-5">PathXAI</h1>
           </a>
         </div>
 

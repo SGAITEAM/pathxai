@@ -13,6 +13,10 @@ Route::get('/predict', function () {
     return view('predictV2');
 });
 
+Route::get('/abstract', function () {
+    return view('abstract');
+});
+
 
 
 

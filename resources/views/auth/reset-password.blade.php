@@ -7,9 +7,9 @@
   <!-- Logo -->
   <a href="{{ url('/') }}" class="app-brand auth-cover-brand">
     <span class="app-brand-logo demo">
-      <img src="{{ asset('assets/img/app-logo.png') }}" height="64" alt="Logo">
+      <img src="{{ asset('/img/logo.png') }}" height="64" alt="Logo">
     </span>
-    <span class="app-brand-text demo text-heading fw-bold">MenuMood</span>
+    <span class="app-brand-text demo text-heading fw-bold">PathXAI</span>
   </a>
   <!-- /Logo -->
 
