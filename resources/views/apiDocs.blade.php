@@ -74,13 +74,13 @@
               {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
               </li> --}}
-              <li class="nav-item active">
-                <a class="nav-link fw-medium" href="#">Özet</a>
+              <li class="nav-item">
+                <a class="nav-link fw-medium" href="/abstract">Özet</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link fw-medium" href="/api-docs">API</a>
               </li>
               
@@ -158,35 +158,200 @@
     <!-- Sections:Start -->
     <div data-bs-spy="scroll" class="scrollspy-example">
       <!-- Prediction Form: Start -->
-      <section id="landing-predict-app" class="section-py bg-body landing-reviews">
-        <div class="container">
-          <div class="row p-12">
-            <div class="col-12">
-              <div class="card">
+      <section id="landing-predict-app" class="section-py first-section-pt">
+        <div class="container mt-6">
+          <div class="row g-6">
+            <div class="col-lg-8">
+              {{-- File --}}
+              <div id="upload-file" class="card mb-4 shadow-sm anchor-target">
+                <div class="card-header">
+                    <h3 class="card-title mb-0 anchor-target">Predict — File Upload</h3>
+                </div>
                 <div class="card-body">
-                  <h4 class="card-title mb-1">Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi</h4>
-                  <h5 class="card-subtitle mb-4 mt-3"><span class="badge bg-dark bg-glow">Yazılım</span> <i class="tabler-slash icon-base ti icon-lg theme-icon-active"></i> <span class="badge bg-info bg-glow">Yapay Zekâ</span></h5>
-                  <p class="card-text" style="font-size: 1.23rem; line-height: 1.77; text-align: justify; text-indent: 3em">
-                    Kanser tanısında altın standart kabul edilen histopatolojik inceleme, manuel değerlendirmenin gözlemciye bağlı değişkenliği 
-                    ve iş yükü sebebiyle bu alanda yapay zekâ entegrasyonunu zorunlu kılan bir dönüşüm sürecindedir. 
-                    Bu proje, meme, akciğer ve kolon kanserlerine ait toplam 530.000’den fazla histopatolojik görüntü içeren beş açık veri seti kullanılarak çoklu 
-                    kanser türlerini analiz edebilen açıklanabilir bir yapay zekâ sistemi geliştirmeyi amaçlamaktadır. 
-                    Tüm modeller EfficientNet tabanlı transfer öğrenme yöntemiyle eğitilmiş, görüntüler standart bir ön işleme hattından geçirilmiştir.
-                    Meme kanseri modeli üç aşamalı transfer öğrenme stratejisiyle kademeli olarak uzmanlaştırılmıştır.
-                    IDC veri seti üzerinde %82, BACH veri setine transferiyle yapılan ikinci aşamada %94, üçüncü ve nihai BreakHis modelinde ise %87 doğruluk ve 0,90 ROC-AUC metriklerine ulaşılmıştır, özellikle malign dokularda kanser duyarlılığı 0,95 seviyesindedir. Meme kanserinin lenf nodu metastazı için geliştirilen modelde %95 doğruluk elde edilmiştir. Akciğer ve kolon modellerinde %100 doğruluk düzeyine erişilmiş olup, bu performansın genellenebilirliği yeni veri setleriyle doğrulanması literatürde önerilen bir yaklaşımdır. Grad-CAM tabanlı açıklanabilir yapay zekâ (XAI) yöntemi sistemin temel bileşeni olarak entegre edilmiş ve modelin hangi doku bölgelerine bakarak karar verdiği görsel ısı haritalarıyla sağlanmıştır. Bu yaklaşım, yalnızca yüksek doğruluk sağlamayı değil yapay zekâ model tahminlerini şeffaflaştırarak kara kutu olmaktan çıkarmayı ve uzman hekimlerin değerlendirmesine yardımcı olmayı amaçlamaktadır. Proje somut bir yazılım ürünü haline getirilerek görüntü yükleme, sınıflandırma ve Grad-CAM çıktılarını tek platformda sunan web uygulaması ile harici uygulamalara entegrasyonunu sağlamak amacıyla API ile tamamlanarak yayına alınmıştır. Sonuç olarak proje Ar-Ge niteliği taşıyan bilimsel bir yapay zekâ modeli ve klinik ön değerlendirme amacıyla kullanılabilir prototip yapay zekâ asistanı ortaya koymaktadır.
-                  
+                  <p class="text-muted mb-2">
+                      Göğüs / Akciğer / Kolon / HCD modelleri için gönderilen resim dosyasına dair yüzdesel çıkarım sonucu döndürür.
                   </p>
-                    <div class="alert alert-secondary">
-                      <span class="h6">Anahtar Kelimeler: </span>
-                      <span class="badge badge-outline-secondary">Histopatoloji</span>
-                      <span class="badge badge-outline-secondary">Derin Öğrenme</span>
-                      <span class="badge badge-outline-secondary">Açıklanabilir Yapay Zeka</span>
-                    </div>
+                  <div class="border rounded p-3 bg-light">
+                    <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
+                      <span class="badge badge-danger">POST</span> /api/predict
+                    </code>
+                  </div>
+                  <h6 class="mt-3 fw-bold">Body (multipart/form-data):</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "model": "breast",
+    "image": (binary file)
+  }
+                  </pre>
+                  <h6 class="fw-bold mt-3">Örnek Response:</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "success": true,
+    "image_url": "/img/preds/breast/api_....jpg",
+    "model": "breast",
+    "prediction": {
+      "positive": 82.5,
+      "negative": 17.4
+    }
+  }
+                  </pre>
+                </div>
+              </div>
+              {{-- Base64 --}}
+              <div id="upload-base64" class="card mb-4 shadow-sm anchor-target">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Predict — Base64</h3>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted">
+                      Base64 ile encode edilmiş görsel dosyalarına dair yüzdesel çıkarım sonucu döner.
+                  </p>
+                  
+                  <div class="border rounded p-3 bg-light">
+                    <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
+                      <span class="badge badge-danger">POST</span> /api/predict-base64
+                    </code>
+                  </div>
+                  <h6 class="mt-3 fw-bold">Body (JSON):</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "model": "lung",
+    "image_base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..."
+  }
+                  </pre>
+                  <h6 class="fw-bold mt-3">Response:</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "success": true,
+    "image_url": "/img/preds/lung/api_123.jpg",
+    "model": "lung",
+    "prediction": {
+      "positive": 87.00,
+      "negative": 13.00
+    }
+  }
+                  </pre>
+                </div>
+              </div>
+              {{-- Login --}}
+              <div id="login" class="card mb-4 shadow-sm  anchor-target">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Login (Get Bearer Token)</h3>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted">
+                      E-posta adresiniz ve parolanız ile API isteklerinde kullanabileceğiniz yetkilendirme tokenı döner.
+                  </p>
+                  
+                  <div class="border rounded p-3 bg-light">
+                    <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
+                      <span class="badge badge-danger">POST</span> /api/login
+                    </code>
+                  </div>
+                  <h6 class="mt-3 fw-bold">Body (JSON):</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "email": "user@test.com",
+    "password": "abcd1234"
+  }
+                  </pre>
+                  <h6 class="fw-bold mt-3">Response:</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "success": true,
+    "token": "3|kRXMd9Up........."
+  }
+                  </pre>
+                </div>
+              </div>
+              {{-- Model Parametreleri --}}
+              <div id="models" class="card mb-4 shadow-sm anchor-target">
+                  <div class="card-header">
+                      <h3 class="card-title mb-0">Desteklenen Model Parametreleri (model)</h3>
+                  </div>
+                  <div class="card-body">
+                      <ul class="list-group">
+                          <li class="list-group-item"><strong>breast</strong> — BreakHis + BACH + IDC Birleşik Göğüs Kanseri Modeli</li>
+                          <li class="list-group-item"><strong>hcd</strong> — Göğüs Kanseri Lenf Nodu Metastazı</li>
+                          <li class="list-group-item"><strong>lung</strong> — Akciğer Kanseri Modeli</li>
+                          <li class="list-group-item"><strong>colon</strong> — Kolon Kanseri Modeli</li>
+                      </ul>
+                  </div>
+              </div>
+              {{-- Response lar --}}
+              <div id="errors" class="card mb-5 shadow-sm anchor-target">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Hata Açıklamaları</h3>
+                </div>
+                <div class="card-body">
+                  <h6 class="fw-bold">Authantication Hatası</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "success": false,
+    "errors": {
+      "authantication": ["Bearer Token is Required"]
+    }
+  }
+                  </pre>
+                  <h6 class="fw-bold">Parametre Hatası (model) (422)</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "success": false,
+    "errors": {
+        "image": [
+            "image alanı gereklidir."
+        ]
+    }
+  }
+                  </pre>
+                  <h6 class="fw-bold mt-3">Model Error (500)</h6>
+                  <pre class="bg-dark text-white p-3 rounded">
+  {
+    "success": false,
+    "message": "Unknown model type"
+  }
+                  </pre>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+            {{-- Menü  --}}
+            <div class="col-lg-4 api-sidebar">
+              <div class="bg-lighter py-2 px-4 rounded">
+                <h5 class="mb-0">EndPoint Listesi</h5>
+              </div>
+              <ul class="list-unstyled mt-4 mb-0">
+                <li class="mb-4">
+                  <a href="#upload-file" class="text-heading d-flex justify-content-between nav-link">
+                    <span class="text-truncate me-2">Görsel Dosyası ile Tahmin</span>
+                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
+                  </a>
+                </li>
+                <li class="mb-4">
+                  <a href="#upload-base64" class="text-heading d-flex justify-content-between nav-link">
+                    <span class="text-truncate me-2">Base64 ile Tahmin</span>
+                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
+                  </a>
+                </li>
+                <li class="mb-4">
+                  <a href="#login" class="text-heading d-flex justify-content-between nav-link">
+                    <span class="text-truncate me-2">Authantication</span>
+                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
+                  </a>
+                </li>
+                <li class="mb-4">
+                  <a href="#models" class="text-heading d-flex justify-content-between nav-link">
+                    <span class="text-truncate me-2">Desteklenen Parametreler</span>
+                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
+                  </a>
+                </li>
+                <li class="mb-4">
+                  <a href="#errors" class="text-heading d-flex justify-content-between nav-link">
+                    <span class="text-truncate me-2">Hata Açıklamaları</span>
+                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
       </section>
       <!-- Prediction Form: End -->
     </div>
@@ -262,6 +427,22 @@
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <style>
+    .anchor-target {
+      scroll-margin-top: 90px; /* navbar yüksekliğine göre */
+    }
+    .api-sidebar {
+      position: sticky;
+      top: 50px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .nav-link.active {
+      font-weight: 600;
+      color: var(--bs-primary) !important;
+    }
+    
+  </style>
 
 <script>
 

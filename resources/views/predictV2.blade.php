@@ -404,7 +404,7 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-           Bu Proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
+           Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
           </div>
           <div>
             <a href="https://github.com/SGAITEAM/pathxai " class="me-1 text-white" target="_blank">
