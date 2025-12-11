@@ -298,7 +298,7 @@
       <!-- Useful features: End -->
 
       <!-- Fun facts: Start -->
-      <section id="landingFacts" class="section-py landing-fun-facts" style="padding-block: 3.3em">
+      <section id="landingFacts" class="section-py landing-fun-facts" style="padding-block: 3.3em; background-color: #f8f7fa; ">
         <div class="container">
           <h2 class="text-center mb-6">
             <span class="position-relative fw-extrabold z-1">Projenin Katkıları
@@ -391,7 +391,7 @@
       <!-- Fun facts: End -->
 
       <!-- Our great team: Start -->
-      <section id="landingTeam" class="section-py landing-team" style="background-color: #f8f7fa; padding-block: 3.3em">
+      <section id="landingTeam" class="section-py landing-team" style="padding-block: 3.3em">
         <div class="container">
           <h3 class="text-center mb-1">
             <span class="position-relative fw-extrabold z-1">Takım

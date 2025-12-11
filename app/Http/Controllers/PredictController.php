@@ -32,7 +32,7 @@ class PredictController extends Controller
                     // Burada makine öğrenimi modeli ile tahmin yapılmalı
                     // Örnek olarak rastgele bir sonuç döndürüyoruz
                     // Bu örnekte, sabit bir yanıt döndürüyoruz
-                    // sleep(3); // 3 saniye bekletir
+                    sleep(3); // 3 saniye bekletir
                     // Flask'a image path gönder
                     $response = Http::asForm()->post("http://127.0.0.1:5005/predict/hcd", [
                         'input_data' => $fileUrlFlask   // dikkat: full path

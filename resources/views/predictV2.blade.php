@@ -164,15 +164,16 @@
             <span class="position-relative fw-extrabold z-1">Histopatoloji Görüntüleri 
               <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
-            Üzerinden Kanser Tespiti
+            Üzerinden Kanser Tespiti {{ __('Phone') }}
           </h4>
           <p class="text-center mb-6 pb-md-4">Görüntü hangi dokuya ait ise ilgili modeli seçmeniz gerekmektedir.</p>
           <div class="row g-6">
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12">
               <div class="card card-contact h-100">
                 <div class="card-body p-3">
                   <div class="contact-img-box position-relative border p-2 h-100" style="border-radius: 0;">
                     <img id="imgRes" src="/img/placeholder.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" style="border-radius: 0;">
+                    <span class="loader"></span>
                     <div class="p-4 pb-2">
                       <div class="row g-4">
                         <div class="col-12">
@@ -191,7 +192,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12">
               <div class="card h-100">
                 <div class="card-body">
                   {{-- <h4 class="mb-2 px-6">Lütfen Model Seçin</h4> --}}
@@ -246,7 +247,7 @@
                                 </label>
                               </div>
                             </div>
-                            <div class="col-md">
+                            <div class="col-md mb-md-0 mb-5">
                               <div class="form-check custom-option custom-option-icon">
                                 <label class="form-check-label custom-option-content" for="colon">
                                   <span class="custom-option-body">
@@ -275,6 +276,7 @@
                       {{-- Form End --}}
                       <div class="col-12 mt-6">
                           {{-- Results --}}
+                          
                           <div class="res d-none" id="resultSection">
                             <div class="card mt-6">
                               <div class="card-body d-flex justify-content-between align-items-center">
@@ -354,6 +356,7 @@
                               </div>
                             </div>
                           </div>
+                          
                           {{-- Results End --}}
                       </div>
                     </div>
@@ -437,6 +440,7 @@
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
 <script>
@@ -591,18 +595,33 @@ function startSwalTimer() {
     Swal.fire({
         title: "🧬 İnceleme Yapılıyor",
         html: `
-            <div style="font-size:22px; font-weight:600; margin-top:10px;">
-                <span id="swal-timer" style="font-family: 'Courier New', monospace; font-size: 18px; display: inline-block; width: 110px; text-align: center;">00:00.000</span>
-                <img src="/img/loading.gif" tyle="width:100%; margin-top:10px;" autoplay loop />
+            <div>
+              <div>
+                <span id="swal-timer" style="font-size:23px; font-weight:600; font-family: 'Courier New', monospace; display: inline-block; width: 100%; text-align: center;">00:00.000</span>
+              </div>
+              {{-- Spinner Loader --}}
+              <div class="d-flex mt-5 mb-3" id="loadingSpinner" style="justify-content: center; align-items: center;">
+                <div class="sk-grid" style="width: 3.7em; height: 3.7em">
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                  <div class="sk-grid-cube"></div>
+                </div>
+              </div>
+              {{-- Spinner Loader End --}}
+                
             </div>
         `,
         allowOutsideClick: false,
         allowEscapeKey: false,
         showConfirmButton: false,
         didOpen: () => {
-
             startTime = Date.now();
-
             timerInterval = setInterval(() => {
                 const elapsed = Date.now() - startTime;
 
