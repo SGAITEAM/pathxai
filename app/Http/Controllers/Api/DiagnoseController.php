@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 
+// API CONTROLLER
+
 class DiagnoseController extends Controller
 {
 

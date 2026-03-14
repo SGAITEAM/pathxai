@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
+    <title>Path-XAI - WSI Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../assets/vendor/fonts/iconify-icons.css" />
+    {{-- <link rel="stylesheet" href="../../assets/vendor/fonts/iconify-icons.css" /> --}}
     <!-- Core CSS -->
     <!-- build:css assets/vendor/css/theme.css  -->
     <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
@@ -161,7 +161,7 @@
       <section id="landing-predict-app" class="section-py bg-body landing-reviews">
         <div class="container">
           <h4 class="text-center mb-3 mt-3">
-            <span class="position-relative fw-extrabold z-1">Histopatoloji Görüntüleri 
+            <span class="position-relative fw-extrabold z-1">WSI Histopatoloji Görüntüleri 
               <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
             Üzerinden Kanser Tespiti
@@ -266,11 +266,23 @@
 
                           <div class="input-group">
                             <input type="file" class="form-control" id="imageInput" name="image" accept="image/*" >
-                            <button class="btn btn-outline-primary waves-effect" type="button" id="predictBtn">
+                            {{-- <button class="btn btn-outline-primary waves-effect" type="button" id="predictBtn" style="width: 250px">
                               <i class="icon-base ti tabler-microscope" style="margin-right: 10px"></i>
-                              İncele
-                            </button>
+                              İncele (Inference)
+                            </button> --}}
+
+                           
                           </div>
+                          <div class="mt-6 d-flex justify-content-between align-items-center d-none" id="patchSizeSection">
+                            <button type="button" class="btn btn-outline-primary waves-effect grid-btn" data-grid="8">8x8</button>
+                            <button type="button" class="btn btn-outline-primary waves-effect grid-btn" data-grid="16">16x16</button>
+                            <button type="button" class="btn btn-outline-primary waves-effect grid-btn" data-grid="32">32x32</button>
+                            <button type="button" class="btn btn-outline-primary waves-effect grid-btn" data-grid="64">64x64</button>
+                            <button type="button" class="btn btn-outline-primary waves-effect grid-btn" data-grid="128">128x128</button>
+                            <button type="button" class="btn btn-outline-primary waves-effect grid-btn" data-grid="256">256x256</button>
+                          </div>
+                          
+                          
                         {{ csrf_field() }}
                       </form>
                       {{-- Form End --}}
@@ -365,6 +377,26 @@
               </div>
             </div>
           </div>
+
+          <div class="row row g-6 mt-4" id="resultsAll">
+            <div class="col-lg-12">
+              {{-- <div class="card card-contact h-100"> --}}
+                {{-- <div class="card-body px-6"> --}}
+                  {{-- Bu bölüme patching ile ilgili seçenekler ve patching sonuçları (beyazlar hariç) gelecek başla butonuna basıldığında yükleme ve inference olayı başlayacak --}}
+                        <!-- Patch önizleme (gizli başlayacak) -->
+                        <div class="col-12 mt-6 d-none" id="patchPreviewSection">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                              <div class="fw-semibold">Patch Önizleme</div>
+                              <div class="text-muted small" id="patchInfo"></div>
+                            </div>
+                            <div class="row g-2" id="patchGrid"></div>
+                        </div>
+
+                        
+                {{-- </div> --}}
+              {{-- </div> --}}
+            </div>
+          </div>
         </div>
       </section>
       <!-- Prediction Form: End -->
@@ -420,6 +452,31 @@
         </div>
       </div>
     </footer>
+
+    <div class="modal fade" id="patchModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border-radius:0;">
+          <div class="modal-header">
+            <h5 class="modal-title">Patch Önizleme</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+          </div>
+
+          <div class="modal-body">
+            <img id="modalPatchImg" class="w-100 border" style="border-radius:0;" src="" alt="patch">
+            <div class="text-muted small mt-2" id="modalPatchMeta"></div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+              <button class="btn btn-primary" id="btnInferPatch">İncele</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+
     <!-- Footer: End -->
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/theme.js -->
@@ -441,6 +498,18 @@
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <style>
+    .contact-img-box { overflow: hidden; }
+    .contact-img-box .loader{
+      display:none;
+      position:absolute;
+      inset:0;
+      background: rgba(255,255,255,.6);
+      z-index: 5;
+    }
+    .contact-img-box.is-loading .loader{ display:block; }
+
+  </style>
 
 
 <script>
@@ -457,24 +526,400 @@
       //     $("#imageInput").click();
       // });
 
+      const MAX_DIM = 8192;       // en uzun kenar limiti
+      const JPEG_QUALITY = 0.75;  // küçültülmüş jpeg kalite
+
+      const PATCH_CACHE = new Map(); // key -> { blob, url, meta }
+      let ACTIVE_PATCH_KEY = null;
+
+      let previewUrl = null; // eski objectURL'yi temizlemek için
+
+      function setPreviewImage(file){
+          // önce eski url varsa temizle
+          if (previewUrl) {
+              URL.revokeObjectURL(previewUrl);
+              previewUrl = null;
+          }
+          previewUrl = URL.createObjectURL(file);
+          $("#imgRes").attr("src", previewUrl);
+      }
+
+      function setLoading(state){
+          const $box = $(".contact-img-box");
+          $box.toggleClass("is-loading", !!state);
+      }
+
+      function computeDims(w, h, maxDim) {
+          const longSide = Math.max(w, h);
+          if (longSide <= maxDim) return { w, h, scaled: false };
+          const s = maxDim / longSide;
+          return { w: Math.round(w * s), h: Math.round(h * s), scaled: true };
+      }
+
+      function resizeJpegIfNeeded(file) {
+          return new Promise((resolve, reject) => {
+              if (!file) return reject("Dosya yok");
+              if (file.type !== "image/jpeg") return reject("Sadece JPG (image/jpeg) kabul ediliyor.");
+
+              const reader = new FileReader();
+              reader.onerror = () => reject("Dosya okunamadı.");
+
+              reader.onload = (e) => {
+                  const img = new Image();
+                  img.onerror = () => reject("Görsel yüklenemedi.");
+
+                  img.onload = () => {
+                      const srcW = img.naturalWidth;
+                      const srcH = img.naturalHeight;
+
+                      const { w: dstW, h: dstH, scaled } = computeDims(srcW, srcH, MAX_DIM);
+
+                      // Küçültme gerekmiyorsa dosyayı aynen kullan
+                      if (!scaled) return resolve({ file, resized: false, width: srcW, height: srcH });
+
+                      const canvas = document.createElement("canvas");
+                      canvas.width = dstW;
+                      canvas.height = dstH;
+
+                      const ctx = canvas.getContext("2d", { alpha: false });
+                      ctx.imageSmoothingEnabled = true;
+                      ctx.imageSmoothingQuality = "high";
+                      ctx.drawImage(img, 0, 0, dstW, dstH);
+
+                      canvas.toBlob((blob) => {
+                          if (!blob) return reject("Küçültme sırasında hata oluştu.");
+
+                          // Blob'u File'a çevirip selectedImage olarak saklayacağız (adı aynı kalsın diye)
+                          const resizedFile = new File([blob], file.name, { type: "image/jpeg" });
+                          resolve({ file: resizedFile, resized: true, width: dstW, height: dstH });
+                      }, "image/jpeg", JPEG_QUALITY);
+                  };
+
+                  img.src = e.target.result; // dataURL
+              };
+
+              reader.readAsDataURL(file);
+          });
+      }
+
       // Kullanıcı bir görsel seçti
-      $("#imageInput").on("change", function (e) {
+      // Kullanıcı bir görsel seçti
+      $("#imageInput").on("change", async function (e) {
           const file = e.target.files[0];
-          if (file) {
-              selectedImage = file;
+          if (!file) return;
+
+          try {
+              setLoading(true);
+
+              const result = await resizeJpegIfNeeded(file); // önceki mesajdaki fonksiyonun aynısı
+              selectedImage = result.file;
+
+              // küçültme/okuma bitti -> buraya bas
+              setPreviewImage(selectedImage);
+
               Swal.fire({
                   icon: "success",
-                  title: "Görsel Seçildi",
-                  text: file.name,
-                  timer: 1000,
+                  title: result.resized ? "Görsel Küçültüldü ve Seçildi" : "Görsel Seçildi",
+                  text: selectedImage.name + (result.resized ? ` (${result.width}×${result.height})` : ""),
+                  timer: 1200,
                   showConfirmButton: false
               });
-              imgMsg.removeClass("d-none").html(`Seçilen Görsel: <strong>${file.name}</strong>`);
+
+              imgMsg.removeClass("d-none")
+                    .html(`Seçilen Görsel: <strong>${selectedImage.name}</strong>${result.resized ? ` <span class="text-muted">(otomatik küçültüldü: ${result.width}×${result.height})</span>` : ""}`);
+              $('#patchSizeSection').removeClass('d-none');
+
+          } catch (err) {
+              selectedImage = null;
+              $("#imageInput").val("");
+              // placeholder'a dön
+              $("#imgRes").attr("src", "/img/placeholder.png");
+
+              Swal.fire({
+                  icon: "error",
+                  title: "Görsel Hatası",
+                  text: String(err),
+              });
+          } finally {
+              setLoading(false);
           }
       });
 
+      // Patchleme !!!
+      let patchPreviewUrls = [];
+
+      function clearPatchPreview(){
+        patchPreviewUrls.forEach(u => URL.revokeObjectURL(u));
+        patchPreviewUrls = [];
+        $("#patchGrid").empty();
+        $("#patchInfo").text("");
+      }
+
+      function loadImageFromBlob(blob){
+        return new Promise((resolve, reject) => {
+          const url = URL.createObjectURL(blob);
+          const img = new Image();
+          img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+          img.onerror = () => { URL.revokeObjectURL(url); reject("Görsel okunamadı."); };
+          img.src = url;
+        });
+      }
+
+      function canvasToBlob(canvas, type="image/jpeg", quality=0.85){
+        return new Promise((resolve, reject) => {
+          canvas.toBlob((blob) => blob ? resolve(blob) : reject("Blob üretilemedi."), type, quality);
+        });
+      }
+
+      /**
+       * Parça "beyaza yakın mı"?
+       * - canvas: parçanın çizildiği küçük test canvas
+       * - whiteTh: 0-255 arası, örn 245 => 245+ değerler beyaza yakın sayılır
+       * - ratioTh: beyaza yakın piksel oranı, örn 0.97 => %97 üstüyse ignore
+       */
+      function isNearWhitePatch_(testCtx, w, h, whiteTh = 225, ratioTh = 0.90){
+        const { data } = testCtx.getImageData(0, 0, w, h);
+        let nearWhite = 0;
+        const total = w * h;
+
+        for(let i=0; i<data.length; i+=4){
+          const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+
+          if(a < 10) { nearWhite++; continue; }
+
+          const luma = 0.2126*r + 0.7152*g + 0.0722*b;
+          if(luma >= whiteTh) nearWhite++;
+        }
+
+        return (nearWhite / total) >= ratioTh;
+      }
+
+      function isNearWhitePatch(testCtx, w, h, whiteTh = 200, ratioTh = 0.70, meanTh = 200, stdTh = 35 ){
+        const { data } = testCtx.getImageData(0, 0, w, h);
+
+        let nearWhite = 0;
+        let sum = 0, sumSq = 0;
+
+        // alfa düşük pikselleri total'a dahil etmeyelim (daha doğru oran)
+        let valid = 0;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const a = data[i + 3];
+          if (a < 10) continue;
+
+          const r = data[i], g = data[i + 1], b = data[i + 2];
+          const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+          valid++;
+          sum += luma;
+          sumSq += luma * luma;
+
+          if (luma >= whiteTh) nearWhite++;
+        }
+
+        // tamamen şeffaf/boş patch ise ignore
+        if (valid === 0) return true;
+
+        const nearWhiteRatio = nearWhite / valid;
+
+        // 1) beyaza çok yakın piksel oranı yüksekse => ignore
+        if (nearWhiteRatio >= ratioTh) return true;
+
+        // 2) “çok açık ama dokusuz” (gri/bej gibi) patch’leri yakala:
+        // ortalama yüksek + standart sapma düşük
+        const mean = sum / valid;
+        const variance = (sumSq / valid) - (mean * mean);
+        const std = Math.sqrt(Math.max(0, variance));
+
+        if (mean >= meanTh && std <= stdTh) return true;
+
+        return false;
+      }
+
+
+      async function createGridSplitPreview({
+        imageBlob,
+        gridN,
+        // filtre ayarları:
+        whiteThreshold = 245,
+        whiteRatioThreshold = 0.97,
+        // performans:
+        previewLimit = 600,   // UI şişmesin diye (64x64 => 4096 parça)
+        sampleSize = 16       // beyaz kontrolünü 16x16 örnekle (hızlı)
+      }){
+        clearPatchPreview();
+        PATCH_CACHE.clear();
+        ACTIVE_PATCH_KEY = null;
+        if(!imageBlob) throw "Önce görsel seçilmelidir.";
+
+        setLoading(true);
+
+        const img = await loadImageFromBlob(imageBlob);
+
+        const W = img.naturalWidth;
+        const H = img.naturalHeight;
+
+        // Asıl çizim canvas
+        const mainCanvas = document.createElement("canvas");
+        mainCanvas.width = W;
+        mainCanvas.height = H;
+        const mctx = mainCanvas.getContext("2d");
+        mctx.drawImage(img, 0, 0);
+
+        // NxN bölme: her hücrenin eni-boyu
+        const cellW = Math.floor(W / gridN);
+        const cellH = Math.floor(H / gridN);
+
+        const totalCells = gridN * gridN;
+
+        $("#patchPreviewSection").removeClass("d-none");
+        $("#patchInfo").text(`${W}×${H} | Grid: ${gridN}×${gridN} = ${totalCells} | Hücre: ~${cellW}×${cellH}px`);
+
+        // parça üretim canvas'ı (gerçek parça)
+        const patchCanvas = document.createElement("canvas");
+        patchCanvas.width = cellW;
+        patchCanvas.height = cellH;
+        const pctx = patchCanvas.getContext("2d");
+
+        // beyaz kontrol canvas'ı (küçük örnek)
+        const testCanvas = document.createElement("canvas");
+        testCanvas.width = sampleSize;
+        testCanvas.height = sampleSize;
+        const tctx = testCanvas.getContext("2d", { willReadFrequently: true });
+
+        let shown = 0;
+        let ignored = 0;
+
+        for(let r=0; r<gridN; r++){
+          for(let c=0; c<gridN; c++){
+            // son satır/sütunda kalan piksel taşmalarını kapsayalım
+            const sx = c * cellW;
+            const sy = r * cellH;
+            const sw = (c === gridN - 1) ? (W - sx) : cellW;
+            const sh = (r === gridN - 1) ? (H - sy) : cellH;
+
+            // Test: parçayı küçük canvasa çiz -> beyaz mı bak
+            tctx.clearRect(0, 0, sampleSize, sampleSize);
+            tctx.drawImage(mainCanvas, sx, sy, sw, sh, 0, 0, sampleSize, sampleSize);
+
+            const nearWhite = isNearWhitePatch(
+              tctx, sampleSize, sampleSize,
+              whiteThreshold, whiteRatioThreshold
+            );
+
+            if(nearWhite){
+              ignored++;
+              continue;
+            }
+
+            // UI limit
+            if(shown >= previewLimit) continue;
+
+            // Gerçek parçayı patchCanvas'a çiz (boyut sabit kalsın diye canvası her parçada resize etmiyoruz)
+            // sw/sh farklıysa: patchCanvas'ı geçici resize etmek daha doğru
+            if(patchCanvas.width !== sw || patchCanvas.height !== sh){
+              patchCanvas.width = sw;
+              patchCanvas.height = sh;
+            }
+            pctx.clearRect(0, 0, sw, sh);
+            pctx.drawImage(mainCanvas, sx, sy, sw, sh, 0, 0, sw, sh);
+
+            const blob = await canvasToBlob(patchCanvas, "image/jpeg", 0.85);
+            const url = URL.createObjectURL(blob);
+            patchPreviewUrls.push(url);
+
+            // $("#patchGrid").append(`
+            //   <div class="col-3 col-sm-2 col-md-1">
+            //     <div class="border p-1">
+            //       <img src="${url}" class="w-100" alt="cell ${r}-${c}">
+            //     </div>
+            //   </div>
+            // `);
+
+            const key = `${gridN}_${r}_${c}`; // benzersiz
+            PATCH_CACHE.set(key, {
+              blob,
+              url,
+              meta: { gridN, r, c, sw, sh, sx, sy }
+            });
+
+            $("#patchGrid").append(`
+              <div class="col-3 col-sm-2 col-md-1">
+                <div class="border p-1">
+                  <img src="${url}" class="w-100 patch-thumb" style="cursor:pointer"
+                      data-patch-key="${key}" alt="cell ${r}-${c}">
+                </div>
+              </div>
+            `);
+
+            shown++;
+          }
+        }
+
+        if(totalCells > previewLimit){
+          $("#patchGrid").prepend(`
+            <div class="col-12">
+              <div class="alert alert-warning py-2 mb-2">
+                Önizleme için <b>${previewLimit}</b> adet gösterildi.
+                (Beyaz ignore hariç) Toplam grid: <b>${totalCells}</b>
+              </div>
+            </div>
+          `);
+        }
+
+        $("#patchInfo").append(` | Gösterilen: ${shown} | Ignore (beyaz): ${ignored}`);
+
+        setLoading(false);
+        return { gridN, totalCells, shown, ignored, cellW, cellH, W, H };
+      }
+
+      // Buton click
+      $(document).on("click", ".grid-btn", async function(){
+        try{
+          if(!selectedImage){
+            Swal.fire({ icon:"warning", title:"Önce görsel seçin", timer: 1200, showConfirmButton:false });
+            return;
+          }
+
+          const gridN = parseInt($(this).data("grid"), 10);
+
+          await createGridSplitPreview({
+            imageBlob: selectedImage,
+            gridN,
+            whiteThreshold: 225,        // 245 -> 225 (daha agresif)
+            whiteRatioThreshold: 0.90,  // 0.97 -> 0.90 (gri-beyaz alanlar da daha çok elenir)
+            previewLimit: 600,
+            sampleSize: 24              // 16 -> 24 (karar daha sağlam)
+          });
+
+          Swal.fire({ icon:"success", title:`${gridN}×${gridN} bölme hazır`, timer: 900, showConfirmButton:false });
+
+        }catch(err){
+          setLoading(false);
+          Swal.fire({ icon:"error", title:"Bölme Hatası", text: String(err) });
+        }
+      });
+
+
+
+      // Kullanıcı bir görsel seçti
+      // $("#imageInput").on("change", function (e) {
+      //     const file = e.target.files[0];
+      //     if (file) {
+      //         selectedImage = file;
+      //         Swal.fire({
+      //             icon: "success",
+      //             title: "Görsel Seçildi",
+      //             text: file.name,
+      //             timer: 1000,
+      //             showConfirmButton: false
+      //         });
+      //         imgMsg.removeClass("d-none").html(`Seçilen Görsel: <strong>${file.name}</strong>`);
+      //     }
+      // });
+
       // İncele butonu
-      $("#predictBtn").on("click", function () {
+      $("#predictBtn__").on("click", function () {
           const model = $("#aiModel").val();
           if (model === "0") {
               Swal.fire({
@@ -587,61 +1032,232 @@
           });
       });
 
+      function predictWithImage(imageFile){
+        const model = $("#aiModel").val();
+        if (model === "0") {
+          Swal.fire({ icon:"warning", title:"Model Seçilmedi", text:"Lütfen bir model seçiniz." });
+          return;
+        }
+        if (!imageFile) {
+          Swal.fire({ icon:"warning", title:"Görsel Eksik", text:"Lütfen bir görsel yükleyiniz." });
+          return;
+        }
+
+        let formData = new FormData();
+        formData.append("_token", $("input[name='_token']").val());
+        formData.append("image", imageFile);
+        formData.append("aiModel", $("input[name='aiModel']:checked").val());
+
+        let url;
+        if(formData.get("aiModel") == 'breast') url = "{{ route('predictBreast') }}";
+        else if(formData.get("aiModel") == 'lung') url = "{{ route('predictLung') }}";
+        else if(formData.get("aiModel") == 'colon') url = "{{ route('predictColon') }}";
+        else if(formData.get("aiModel") == 'hcd') url = "{{ route('predictHCD') }}";
+
+        $.ajax({
+          url: url,
+          method: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+
+          beforeSend: function () {
+            $("#predictBtn").prop("disabled", true);
+            startSwalTimer();
+          },
+
+          
+          success: function (res) {
+            stopSwalTimer(); // Swal kapat + timer durdur
+            // Backend başarısız döndüyse
+            if (res.success === false) {
+                stopSwalTimer(); // Swal kapat + timer durdur
+                Swal.fire({
+                    icon: "error",
+                    title: "İşlem Tamamlanamadı",
+                    text: res.error || "Beklenmeyen bir hata oluştu.",
+                    confirmButtonText: "Tamam"
+                });
+                return; // devam etme
+            }
+            // Başarılı ise olacaklar bundan sonra
+            Swal.fire({
+              icon: "success",
+              title: "İnceleme Tamamlandı",
+              //confirmButtonText: "Tamam",
+              showConfirmButton: false,
+              timer: 1000
+            });
+            console.log(res);
+            // XAI varsa
+            if (res.xai_image_url) {
+
+              currentOriginalImage = res.image_url;
+              currentXaiImage = res.xai_image_url;
+
+              const img = $("#imgRes");
+
+              img.attr("src", currentXaiImage + "?t=" + Date.now()).addClass("xai-active"); // pointer
+                // 🔥 BAS–BIRAK EVENT’LERİ (SADECE BURADA)
+                img.on("mousedown touchstart", function () {
+                img.attr("src", currentOriginalImage);
+              });
+
+              img.on("mouseup touchend mouseleave", function () {
+                img.attr("src", currentXaiImage);
+              });
+
+              $("#imgText").html("XAI Uygulandı, Görsel üzerine basılı tutarak orijinal görseli inceleyebilirsiniz.");
+              $("#imgIcon").removeClass("tabler-loader-2").addClass("tabler-photo-check");
+              $("#imgIcon").removeClass("tabler-upload").addClass("tabler-photo-check");
+              $("#imgBadge").removeClass("bg-label-primary").addClass("bg-label-success");
+            }
+            // XAI yoksa
+            else if (res.image_url) {
+              const img = $("#imgRes");
+              img.off().attr("src", res.image_url + "?t=" + Date.now()).removeClass("xai-active");
+              $("#imgText").html(`Analiz tamalandı fakat sunucu donanımındaki kısıtlar ve maliyetler nedeniyle, Göğüs Kanseri modeli için Grad-CAM (XAI) şu anda uygulama (production) ortamında yapılamamaktadır. Ancak, bu modelle ilgili XAI görselleştirmeleri Kaggle üzerinde başarıyla yapılmıştır.<a href='https://kaggle.com/code/berkkaraman/' target='_blank'> Buradan inceleyebilirsiniz.</a> Diğer tüm modellerde ise Grad-CAM işlevselliği sağlanmaktadır.`);
+              $("#imgIcon").removeClass("tabler-loader-2").addClass("tabler-alert-square-rounded");
+              $("#imgIcon").removeClass("tabler-upload").addClass("tabler-alert-square-rounded");
+              $("#imgBadge").removeClass("bg-label-primary").addClass("bg-label-success");
+            }
+            // LUNG MODEL İÇİN ÖZEL HESAPLAMA
+            if (res.probabilities) {
+              let aca = res.probabilities.ACA || 0;
+              let scc = res.probabilities.SCC || 0;
+              let normal = res.probabilities.NORMAL || 0;
+              let positive = aca + scc; // ACA + SCC
+              let negative = normal;    // NORMAL
+
+              // Card 1 — Pozitif
+              $("#pozitif").text(positive.toFixed(2) + "% Pozitif");
+              $("#pozitifSub").text(`ACA: ${aca.toFixed(2)}% — SCC: ${scc.toFixed(2)}%`);
+
+              // Card 2 — Negatif
+              $("#negatif").text(negative.toFixed(2) + "% Negatif");
+              $("#negatifSub").text(`Normal Doku: ${normal.toFixed(2)}%`);
+            }
+            else{
+              // Pozitif (%)
+              if (res.positive !== undefined) {
+                  $("#pozitif").text(res.positive + "% Pozitif");
+                  $("#pozitifSub").text(`(Kanser Dokusu İçerir)`);
+              }
+              // Negatif (%)
+              if (res.negative !== undefined) {
+                  $("#negatif").text(res.negative + "% Negatif");
+                  $("#negatifSub").text(`(Kanser Dokusu İçermez)`);
+              }
+            }
+            // Sonuç bölümünü göster
+            $("#resultSection").removeClass("d-none");
+          }, // success sonu
+
+          
+
+          error: function () {
+            stopSwalTimer();
+          },
+
+          complete: function () {
+            $("#predictBtn").prop("disabled", false);
+          }
+        });
+      }
+
+      $("#predictBtn").on("click", function () {
+        predictWithImage(selectedImage);
+      });
+
+      $(document).on("click", ".patch-thumb", function(){
+        const key = $(this).data("patch-key");
+        const patch = PATCH_CACHE.get(key);
+        if(!patch) return;
+
+        ACTIVE_PATCH_KEY = key;
+
+        $("#modalPatchImg").attr("src", patch.url);
+        $("#modalPatchMeta").text(`Grid: ${patch.meta.gridN} | r:${patch.meta.r} c:${patch.meta.c} | ${patch.meta.sw}×${patch.meta.sh}px`);
+
+        const modalEl = document.getElementById("patchModal");
+        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+      });
+
+      $("#btnInferPatch").on("click", function(){
+        if(!ACTIVE_PATCH_KEY) return;
+
+        const patch = PATCH_CACHE.get(ACTIVE_PATCH_KEY);
+        if(!patch) return;
+
+        // blob -> File (senin predictWithImage FormData'sı File ile çalışıyor)
+        const patchFile = new File([patch.blob], `patch_${patch.meta.gridN}_${patch.meta.r}_${patch.meta.c}.jpg`, { type: "image/jpeg" });
+
+        // modal kapat
+        const modalEl = document.getElementById("patchModal");
+        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+
+        // mevcut akışla gönder
+        predictWithImage(patchFile);
+      });
+
+
+
   });
 
-let timerInterval;
-let startTime;
+  let timerInterval;
+  let startTime;
 
-function startSwalTimer() {
+  function startSwalTimer() {
 
-    Swal.fire({
-        title: "🧬 İnceleme Yapılıyor",
-        html: `
-            <div>
+      Swal.fire({
+          title: "🧬 İnceleme Yapılıyor",
+          html: `
               <div>
-                <span id="swal-timer" style="font-size:23px; font-weight:600; font-family: 'Courier New', monospace; display: inline-block; width: 100%; text-align: center;">00:00.000</span>
-              </div>
-              {{-- Spinner Loader --}}
-              <div class="d-flex mt-5 mb-3" id="loadingSpinner" style="justify-content: center; align-items: center;">
-                <div class="sk-grid" style="width: 3.7em; height: 3.7em">
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
+                <div>
+                  <span id="swal-timer" style="font-size:23px; font-weight:600; font-family: 'Courier New', monospace; display: inline-block; width: 100%; text-align: center;">00:00.000</span>
                 </div>
+                {{-- Spinner Loader --}}
+                <div class="d-flex mt-5 mb-3" id="loadingSpinner" style="justify-content: center; align-items: center;">
+                  <div class="sk-grid" style="width: 3.7em; height: 3.7em">
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                  </div>
+                </div>
+                {{-- Spinner Loader End --}}
+                  
               </div>
-              {{-- Spinner Loader End --}}
-                
-            </div>
-        `,
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        didOpen: () => {
-            startTime = Date.now();
-            timerInterval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
+          `,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          didOpen: () => {
+              startTime = Date.now();
+              timerInterval = setInterval(() => {
+                  const elapsed = Date.now() - startTime;
 
-                const minutes = String(Math.floor(elapsed / 60000)).padStart(2, '0');
-                const seconds = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
-                const ms = String(elapsed % 1000).padStart(3, '0');
+                  const minutes = String(Math.floor(elapsed / 60000)).padStart(2, '0');
+                  const seconds = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
+                  const ms = String(elapsed % 1000).padStart(3, '0');
 
-                document.getElementById("swal-timer").textContent = `${minutes}:${seconds}.${ms}`;
-            }, 30);
+                  document.getElementById("swal-timer").textContent = `${minutes}:${seconds}.${ms}`;
+              }, 30);
 
-        }
-    });
-}
+          }
+      });
+  }
 
-function stopSwalTimer() {
-    clearInterval(timerInterval);
-    Swal.close();
-}
+  function stopSwalTimer() {
+      clearInterval(timerInterval);
+      Swal.close();
+  }
 </script>
 
 

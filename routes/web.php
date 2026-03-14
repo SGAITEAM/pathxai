@@ -5,12 +5,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PredictController;
 
+// WEB ROTALARI 
+
 Route::get('/', function () {
     return view('landing');
 });
 
 Route::get('/predict', function () {
     return view('predictV2');
+});
+
+Route::get('/predict-wsi', function () {
+    return view('predictWSI');
 });
 
 Route::get('/abstract', function () {

@@ -187,7 +187,7 @@
                     </div>
                   </div>
               </div>
-              <div class="col-lg-5">
+              <div class="col-lg-5 mt-4 mt-lg-0">
                 <div class="card landing-hero-card shadow-lg border-3">
                   <img src="img/dataset-cover.png" class="d-block w-100" alt="" >
                 </div>
