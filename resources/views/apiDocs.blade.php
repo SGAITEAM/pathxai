@@ -1,10 +1,10 @@
 <!doctype html>
 
-<html lang="tr" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-assets-path="../../assets/" data-template="front-pages" data-bs-theme="light">
+<html lang="{{ app()->getLocale() }}" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-assets-path="../../assets/" data-template="front-pages" data-bs-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
+    <title>{{ __('page_title') }}</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -69,16 +69,16 @@
                 <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Ana Sayfa</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/predict">YZ Teşhis Asistanı</a>
+                <a class="nav-link fw-medium" href="/predict">{{ __('nav_predict') }}</a>
               </li>
               {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/abstract">Özet</a>
+                <a class="nav-link fw-medium" href="/abstract">{{ __('nav_abstract') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
+                <a class="nav-link fw-medium" href="/#landingTeam">{{ __('nav_team') }}</a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link fw-medium" href="/api-docs">API</a>
@@ -141,11 +141,12 @@
             </li>
             <!-- / Style Switcher-->
 
+            @include('partials.lang-dropdown')
             <!-- navbar button: Start -->
             <li>
               <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self"
                 ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
-                ><span class="d-none d-md-block">Giriş/Kayıt</span></a
+                ><span class="d-none d-md-block">{{ __('nav_login') }}</span></a
               >
             </li>
             <!-- navbar button: End -->
@@ -165,11 +166,11 @@
               {{-- File --}}
               <div id="upload-file" class="card mb-4 shadow-sm anchor-target">
                 <div class="card-header">
-                    <h3 class="card-title mb-0 anchor-target">Predict — File Upload</h3>
+                    <h3 class="card-title mb-0 anchor-target">{{ __('api_predict_file_title') }}</h3>
                 </div>
                 <div class="card-body">
                   <p class="text-muted mb-2">
-                      Göğüs / Akciğer / Kolon / HCD modelleri için gönderilen resim dosyasına dair yüzdesel çıkarım sonucu döndürür.
+                      {{ __('api_predict_file_desc') }}
                   </p>
                   <div class="border rounded p-3 bg-light">
                     <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
@@ -183,7 +184,7 @@
     "image": (binary file)
   }
                   </pre>
-                  <h6 class="fw-bold mt-3">Örnek Response:</h6>
+                  <h6 class="fw-bold mt-3">{{ __('api_example_response') }}</h6>
                   <pre class="bg-dark text-white p-3 rounded">
   {
     "success": true,
@@ -200,11 +201,11 @@
               {{-- Base64 --}}
               <div id="upload-base64" class="card mb-4 shadow-sm anchor-target">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">Predict — Base64</h3>
+                    <h3 class="card-title mb-0">{{ __('api_predict_base64_title') }}</h3>
                 </div>
                 <div class="card-body">
                   <p class="text-muted">
-                      Base64 ile encode edilmiş görsel dosyalarına dair yüzdesel çıkarım sonucu döner.
+                      {{ __('api_predict_base64_desc') }}
                   </p>
                   
                   <div class="border rounded p-3 bg-light">
@@ -236,11 +237,11 @@
               {{-- Login --}}
               <div id="login" class="card mb-4 shadow-sm  anchor-target">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">Login (Get Bearer Token)</h3>
+                    <h3 class="card-title mb-0">{{ __('api_login_title') }}</h3>
                 </div>
                 <div class="card-body">
                   <p class="text-muted">
-                      E-posta adresiniz ve parolanız ile API isteklerinde kullanabileceğiniz yetkilendirme tokenı döner.
+                      {{ __('api_login_desc') }}
                   </p>
                   
                   <div class="border rounded p-3 bg-light">
@@ -267,33 +268,33 @@
               {{-- Model Parametreleri --}}
               <div id="models" class="card mb-4 shadow-sm anchor-target">
                   <div class="card-header">
-                      <h3 class="card-title mb-0">Desteklenen Model Parametreleri (model)</h3>
+                      <h3 class="card-title mb-0">{{ __('api_models_title') }}</h3>
                   </div>
                   <div class="card-body">
                       <ul class="list-group">
-                          <li class="list-group-item"><strong>breast</strong> — BreakHis + BACH + IDC Birleşik Göğüs Kanseri Modeli</li>
-                          <li class="list-group-item"><strong>hcd</strong> — Göğüs Kanseri Lenf Nodu Metastazı</li>
-                          <li class="list-group-item"><strong>lung</strong> — Akciğer Kanseri Modeli</li>
-                          <li class="list-group-item"><strong>colon</strong> — Kolon Kanseri Modeli</li>
+                          <li class="list-group-item"><strong>breast</strong> — {{ __('api_model_breast') }}</li>
+                          <li class="list-group-item"><strong>hcd</strong> — {{ __('api_model_hcd') }}</li>
+                          <li class="list-group-item"><strong>lung</strong> — {{ __('api_model_lung') }}</li>
+                          <li class="list-group-item"><strong>colon</strong> — {{ __('api_model_colon') }}</li>
                       </ul>
                   </div>
               </div>
               {{-- Response lar --}}
               <div id="errors" class="card mb-5 shadow-sm anchor-target">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">Hata Açıklamaları</h3>
+                    <h3 class="card-title mb-0">{{ __('api_errors_title') }}</h3>
                 </div>
                 <div class="card-body">
-                  <h6 class="fw-bold">Authantication Hatası</h6>
+                  <h6 class="fw-bold">{{ __('api_auth_error') }}</h6>
                   <pre class="bg-dark text-white p-3 rounded">
   {
     "success": false,
     "errors": {
-      "authantication": ["Bearer Token is Required"]
+      "authentication": ["Bearer Token is Required"]
     }
   }
                   </pre>
-                  <h6 class="fw-bold">Parametre Hatası (model) (422)</h6>
+                  <h6 class="fw-bold">{{ __('api_param_error') }}</h6>
                   <pre class="bg-dark text-white p-3 rounded">
   {
     "success": false,
@@ -317,36 +318,36 @@
             {{-- Menü  --}}
             <div class="col-lg-4 api-sidebar">
               <div class="bg-lighter py-2 px-4 rounded">
-                <h5 class="mb-0">EndPoint Listesi</h5>
+                <h5 class="mb-0">{{ __('api_endpoint_list') }}</h5>
               </div>
               <ul class="list-unstyled mt-4 mb-0">
                 <li class="mb-4">
                   <a href="#upload-file" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">Görsel Dosyası ile Tahmin</span>
+                    <span class="text-truncate me-2">{{ __('api_sidebar_file') }}</span>
                     <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
                   </a>
                 </li>
                 <li class="mb-4">
                   <a href="#upload-base64" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">Base64 ile Tahmin</span>
+                    <span class="text-truncate me-2">{{ __('api_sidebar_base64') }}</span>
                     <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
                   </a>
                 </li>
                 <li class="mb-4">
                   <a href="#login" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">Authantication</span>
+                    <span class="text-truncate me-2">{{ __('api_sidebar_auth') }}</span>
                     <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
                   </a>
                 </li>
                 <li class="mb-4">
                   <a href="#models" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">Desteklenen Parametreler</span>
+                    <span class="text-truncate me-2">{{ __('api_sidebar_params') }}</span>
                     <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
                   </a>
                 </li>
                 <li class="mb-4">
                   <a href="#errors" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">Hata Açıklamaları</span>
+                    <span class="text-truncate me-2">{{ __('api_sidebar_errors') }}</span>
                     <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
                   </a>
                 </li>
@@ -374,7 +375,7 @@
                 <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">SG AI TEAM</span>
               </a>
               <p class="footer-text footer-logo-description mb-6">
-                Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                {{ __('footer_description') }}
               </p>
               </form>
             </div>
@@ -390,7 +391,7 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-           Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
+           {{ __('footer_project') }}  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> {{ __('footer_tubitak') }}
           </div>
           <div>
             <a href="https://github.com/SGAITEAM/pathxai " class="me-1 text-white" target="_blank">

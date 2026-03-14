@@ -1,10 +1,10 @@
 <!doctype html>
 
-<html lang="tr" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-assets-path="../../assets/" data-template="front-pages" data-bs-theme="light">
+<html lang="{{ app()->getLocale() }}" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-assets-path="../../assets/" data-template="front-pages" data-bs-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
+    <title>{{ __('page_title') }}</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -68,16 +68,16 @@
                 <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Ana Sayfa</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/predict">YZ Teşhis Asistanı</a>
+                <a class="nav-link fw-medium" href="/predict">{{ __('nav_predict') }}</a>
               </li>
               {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/abstract">Özet</a>
+                <a class="nav-link fw-medium" href="/abstract">{{ __('nav_abstract') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
+                <a class="nav-link fw-medium" href="/#landingTeam">{{ __('nav_team') }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/api-docs">API</a>
@@ -140,11 +140,12 @@
             </li>
             <!-- / Style Switcher-->
 
+            @include('partials.lang-dropdown')
             <!-- navbar button: Start -->
             <li>
               <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self"
                 ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
-                ><span class="d-none d-md-block">Giriş/Kayıt</span></a
+                ><span class="d-none d-md-block">{{ __('nav_login') }}</span></a
               >
             </li>
             <!-- navbar button: End -->
@@ -165,24 +166,23 @@
               <div class="col-lg-7">
                   <div class="hero-text-box text-center position-relative" style="max-inline-size: 90%;">
                     <h1 class="text-primary hero-title display-6 fw-extrabold">
-                      Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                      {{ __('hero_title') }}
                     </h1>
                     <h2 class="hero-sub-title h6 mb-6">
-                      Bu proje, kanserli hücrelerin histopatolojik görüntüler üzerinden tespit ve sınıflandırılmasını sağlayarak, 
-                      klinik karar sürecini desteklemeyi amaçlamaktadır.
+                      {{ __('hero_subtitle') }}
                       <br class="d-none d-lg-block mb-3" />
                       <span class="position-relative fw-extrabold z-1">
-                        TÜBİTAK 2204-A 
+                        {{ __('hero_tubitak') }} 
                         <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
                       </span>
-                        kapsamında 
-                        <br>Eskişehir Sabiha Gökçen M.T.A.L öğrencileri tarfından geliştirilmiştir.
+                        {{ __('hero_tubitak_suffix') }} 
+                        <br>{{ __('hero_school') }}
                       
                     </h2>
                     <div class="landing-hero-btn d-inline-block position-relative">
                       <a href="/predict" class="btn btn-primary btn-lg">
                         <span class="tf-icons icon-base ti tabler-microscope scaleX-n1-rtl me-md-3"></span>
-                        Teşhis Asistanı
+                        {{ __('hero_btn') }}
                       </a>
                     </div>
                   </div>
@@ -203,9 +203,9 @@
       <section id="landingFeatures" class="section-py landing-features"  style="padding-block: 3.3em">
         <div class="container">
           <h2 class="text-center mb-3">
-            Projede Kullanılan  
+            {{ __('features_title_prefix') }}  
             <span class="position-relative fw-extrabold z-1">
-              Teknikler
+              {{ __('features_title_highlight') }}
               <img
                 src="../../assets/img/front-pages/icons/section-title-icon.png"
                 alt="laptop charging"
@@ -226,7 +226,7 @@
               </div>
               <h5 class="mb-2">XAI</h5>
               <p class="features-icon-description">
-                Yapay zekânın verdiği kararları görselleştirerek kara kutu olmasını engeller
+                {{ __('feat_xai') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -236,7 +236,7 @@
               </div>
               <h5 class="mb-2">Grad-CAM</h5>
               <p class="features-icon-description">
-                Modelin hangi dokulardan çıkarım yaptığını renkli ısı haritalarıyla gösterir
+                {{ __('feat_gradcam') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -266,7 +266,7 @@
               </div>
               <h5 class="mb-2">Patch & WSI</h5>
               <p class="features-icon-description">
-                Doku örnekleri dijital olarak incelenir ve çıkarım yapılır
+                {{ __('feat_patch') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -275,22 +275,22 @@
               </div>
               <h5 class="mb-2">ROC-AUC & Accuracy</h5>
               <p class="features-icon-description">
-                Modelin doğruluk ve performansını gösteren metrikler
+                {{ __('feat_roc') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
               <div class="text-center mb-4 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-stack-pop"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 9.5l-3 1.5l8 4l8 -4l-3 -1.5" /><path d="M4 15l8 4l8 -4" /><path d="M12 11v-7" /><path d="M9 7l3 -3l3 3" /></svg>
               </div>
-              <h5 class="mb-2">Transfer Öğrenme</h5>
-              <p class="features-icon-description">Ağırlık aktarımı ile daha önce eğitilmiş modellerden faydalanmayı sağlayan derin öğrenme tekniği</p>
+              <h5 class="mb-2">{{ __('Transfer Öğrenme') }}</h5>
+              <p class="features-icon-description">{{ __('feat_transfer') }}</p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
               <div class="text-center mb-4 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-stack-front"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-8 4l8 4l8 -4l-8 -4" fill="currentColor" /><path d="M8 14l-4 2l8 4l8 -4l-4 -2" /><path d="M8 10l-4 2l8 4l8 -4l-4 -2" /></svg>
               </div>
-              <h5 class="mb-2">Data Augmentation</h5>
-              <p class="features-icon-description">Modelin daha dayanıklı olması için görüntüleri döndürme, kırpma gibi işlemlerle çeşitlendirme tekniğidir</p>
+              <h5 class="mb-2">{{ __('Data Augmentation') }}</h5>
+              <p class="features-icon-description">{{ __('feat_augmentation') }}</p>
             </div>
           </div>
         </div>
@@ -301,7 +301,7 @@
       <section id="landingFacts" class="section-py landing-fun-facts" style="padding-block: 3.3em; background-color: #f8f7fa; ">
         <div class="container">
           <h2 class="text-center mb-6">
-            <span class="position-relative fw-extrabold z-1">Projenin Katkıları
+            <span class="position-relative fw-extrabold z-1">{{ __('facts_title') }}
               <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
           </h2>
@@ -327,7 +327,7 @@
                   <h3 class="mb-0">530 K+</h3>
                   <p class="fw-medium mb-0">
                     ’den fazla histopatolojik görüntü<br />
-                    ile eğitilmiş modeller
+                    {{ __('facts_images_sub') }}
                   </p>
                 </div>
               </div>
@@ -347,8 +347,8 @@
                   </div>
                   <h3 class="mb-0">4 </h3>
                   <p class="fw-medium mb-0">
-                    Farklı Kanser Türü<br />
-                    ve 1 Metastaz Kanser Türü
+                    {{ __('facts_cancer_types') }}<br />
+                    {{ __('facts_cancer_types_sub') }}
                   </p>
                 </div>
               </div>
@@ -361,7 +361,7 @@
                   </div>
                   <h3 class="mb-0">%87-100</h3>
                   <p class="fw-medium mb-0">
-                    Çıkarım Doğrulu<br />
+                    {{ __('facts_accuracy') }}<br />
                     (Accuracy)
                   </p>
                 </div>
@@ -379,7 +379,7 @@
                   </div>
                   <h3 class="mb-0">%95-100</h3>
                   <p class="fw-medium mb-0">
-                    Kanserli Hücre Yakalama Başarısı<br />
+                    {{ __('facts_recall') }}<br />
                     (Recall)
                   </p>
                 </div>
@@ -394,12 +394,12 @@
       <section id="landingTeam" class="section-py landing-team" style="padding-block: 3.3em">
         <div class="container">
           <h3 class="text-center mb-1">
-            <span class="position-relative fw-extrabold z-1">Takım
+            <span class="position-relative fw-extrabold z-1">{{ __('team_title') }}
               <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
           </h3>
           <p class="text-center pb-3">
-            Model Geliştirme, Yazılım Geliştirme, Tasarım ve Akademik süreçlere katkı sunan ekip üyeleri.
+            {{ __('team_description') }}
           </p>
           <div class="row gy-4 mt-2">
             <!-- Üye 1 -->
@@ -451,7 +451,7 @@
                 <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">SG AI TEAM</span>
               </a>
               <p class="footer-text footer-logo-description mb-6">
-                Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                {{ __('footer_description') }}
               </p>
               </form>
             </div>
@@ -467,7 +467,7 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-           Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
+           {{ __('footer_project') }}  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> {{ __('footer_tubitak') }}
           </div>
           <div>
             <a href="https://github.com/SGAITEAM/pathxai" class="me-1 text-white" target="_blank">

@@ -1,10 +1,10 @@
 <!doctype html>
 
-<html lang="tr" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-assets-path="../../assets/" data-template="front-pages" data-bs-theme="light">
+<html lang="{{ app()->getLocale() }}" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-assets-path="../../assets/" data-template="front-pages" data-bs-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
+    <title>{{ __('page_title') }}</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -69,16 +69,16 @@
                 <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Ana Sayfa</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/predict">YZ Teşhis Asistanı</a>
+                <a class="nav-link fw-medium" href="/predict">{{ __('nav_predict') }}</a>
               </li>
               {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
               </li> --}}
               <li class="nav-item active">
-                <a class="nav-link fw-medium" href="#">Özet</a>
+                <a class="nav-link fw-medium" href="#">{{ __('nav_abstract') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
+                <a class="nav-link fw-medium" href="/#landingTeam">{{ __('nav_team') }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/api-docs">API</a>
@@ -141,11 +141,12 @@
             </li>
             <!-- / Style Switcher-->
 
+            @include('partials.lang-dropdown')
             <!-- navbar button: Start -->
             <li>
               <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self"
                 ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
-                ><span class="d-none d-md-block">Giriş/Kayıt</span></a
+                ><span class="d-none d-md-block">{{ __('nav_login') }}</span></a
               >
             </li>
             <!-- navbar button: End -->
@@ -164,8 +165,8 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title mb-1">Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi</h4>
-                  <h5 class="card-subtitle mb-4 mt-3"><span class="badge bg-dark bg-glow">Yazılım</span> <i class="tabler-slash icon-base ti icon-lg theme-icon-active"></i> <span class="badge bg-info bg-glow">Yapay Zekâ</span></h5>
+                  <h4 class="card-title mb-1">{{ __('abstract_title') }}</h4>
+                  <h5 class="card-subtitle mb-4 mt-3"><span class="badge bg-dark bg-glow">{{ __('abstract_badge_software') }}</span> <i class="tabler-slash icon-base ti icon-lg theme-icon-active"></i> <span class="badge bg-info bg-glow">{{ __('abstract_badge_ai') }}</span></h5>
                   <p class="card-text" style="font-size: 1.23rem; line-height: 1.77; text-align: justify; text-indent: 3em">
                     Kanser tanısında altın standart kabul edilen histopatolojik inceleme, manuel değerlendirmenin gözlemciye bağlı değişkenliği 
                     ve iş yükü sebebiyle bu alanda yapay zekâ entegrasyonunu zorunlu kılan bir dönüşüm sürecindedir. 
@@ -177,10 +178,10 @@
                   
                   </p>
                     <div class="alert alert-secondary">
-                      <span class="h6">Anahtar Kelimeler: </span>
-                      <span class="badge badge-outline-secondary">Histopatoloji</span>
-                      <span class="badge badge-outline-secondary">Derin Öğrenme</span>
-                      <span class="badge badge-outline-secondary">Açıklanabilir Yapay Zeka</span>
+                      <span class="h6">{{ __('abstract_keywords_title') }} </span>
+                      <span class="badge badge-outline-secondary">{{ __('abstract_kw_histopathology') }}</span>
+                      <span class="badge badge-outline-secondary">{{ __('abstract_kw_deep_learning') }}</span>
+                      <span class="badge badge-outline-secondary">{{ __('abstract_kw_xai') }}</span>
                     </div>
                 </div>
               </div>
@@ -209,7 +210,7 @@
                 <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">SG AI TEAM</span>
               </a>
               <p class="footer-text footer-logo-description mb-6">
-                Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                {{ __('footer_description') }}
               </p>
               </form>
             </div>
@@ -225,7 +226,7 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-           Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
+           {{ __('footer_project') }}  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> {{ __('footer_tubitak') }}
           </div>
           <div>
             <a href="https://github.com/SGAITEAM/pathxai " class="me-1 text-white" target="_blank">

@@ -34,11 +34,11 @@ Route::post('/predict/colon', [PredictController::class, 'predictColon'])->name(
 
 
 Route::get('/lang/{locale}', function ($locale) {
-    // Sadece 'tr' ve 'en' dillerine izin ver
-    if (in_array($locale, ['tr', 'en'])) {
-        Session::put('locale', $locale); // Seçilen dili hafızaya al
+    $supported = ['tr','en','de','fr','es','pt','it','ru','zh_CN','ja','ko','ar','hi','pl','nl'];
+    if (in_array($locale, $supported)) {
+        Session::put('locale', $locale);
     }
-    return redirect()->back(); // Kullanıcıyı geldiği sayfaya geri gönder
+    return redirect()->back();
 })->name('lang.switch');
 
 
