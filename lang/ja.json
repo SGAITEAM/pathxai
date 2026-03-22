@@ -4,7 +4,7 @@
     "nav_abstract": "要約",
     "nav_team": "チーム",
     "nav_api": "API",
-    "nav_login": "ログイン\/登録",
+    "nav_login": "ログイン/登録",
     "hero_title": "病理組織画像におけるがん検出と説明可能なAI(XAI)支援意思決定システム",
     "hero_subtitle": "このプロジェクトは、病理組織画像からがん細胞を検出・分類することで臨床的意思決定プロセスを支援することを目的としています。",
     "hero_tubitak": "TÜBİTAK 2204-A",
@@ -68,7 +68,7 @@
     "abstract_kw_deep_learning": "深層学習",
     "abstract_kw_xai": "説明可能な人工知能",
     "api_predict_file_title": "Predict — ファイルアップロード",
-    "api_predict_file_desc": "乳房\/肺\/大腸\/HCDモデルに送信された画像ファイルのパーセンテージ推論結果を返します。",
+    "api_predict_file_desc": "乳房/肺/大腸/HCDモデルに送信された画像ファイルのパーセンテージ推論結果を返します。",
     "api_example_response": "レスポンス例：",
     "api_predict_base64_title": "Predict — Base64",
     "api_predict_base64_desc": "Base64エンコードされた画像ファイルのパーセンテージ推論結果を返します。",
@@ -106,5 +106,6 @@
     "Send Password Reset Link": "リセットリンクを送信",
     "Name": "名前",
     "Email Address": "メールアドレス",
-    "Dashboard": "ダッシュボード"
+    "Dashboard": "ダッシュボード",
+    "nav_patch": "WSI 検査"
 }

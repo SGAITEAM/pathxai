@@ -4,7 +4,7 @@
     "nav_abstract": "Streszczenie",
     "nav_team": "Zespół",
     "nav_api": "API",
-    "nav_login": "Logowanie\/Rejestracja",
+    "nav_login": "Logowanie/Rejestracja",
     "hero_title": "Wykrywanie raka na obrazach histopatologicznych i system wspomagania decyzji oparty na wyjaśnialnej AI (XAI)",
     "hero_subtitle": "Projekt ma na celu wspomaganie procesu decyzji klinicznych poprzez wykrywanie i klasyfikację komórek rakowych na obrazach histopatologicznych.",
     "hero_tubitak": "TÜBİTAK 2204-A",
@@ -68,7 +68,7 @@
     "abstract_kw_deep_learning": "Deep Learning",
     "abstract_kw_xai": "Wyjaśnialna sztuczna inteligencja",
     "api_predict_file_title": "Predict — Przesyłanie pliku",
-    "api_predict_file_desc": "Zwraca procentowe wyniki wnioskowania dla plików obrazów wysłanych do modeli Pierś\/Płuca\/Okrężnica\/HCD.",
+    "api_predict_file_desc": "Zwraca procentowe wyniki wnioskowania dla plików obrazów wysłanych do modeli Pierś/Płuca/Okrężnica/HCD.",
     "api_example_response": "Przykładowa odpowiedź:",
     "api_predict_base64_title": "Predict — Base64",
     "api_predict_base64_desc": "Zwraca procentowe wyniki wnioskowania dla plików zakodowanych w Base64.",
@@ -106,5 +106,6 @@
     "Send Password Reset Link": "Wyślij link resetujący",
     "Name": "Imię",
     "Email Address": "Adres e-mail",
-    "Dashboard": "Panel"
+    "Dashboard": "Panel",
+    "nav_patch": "WSI Eksploracja"
 }

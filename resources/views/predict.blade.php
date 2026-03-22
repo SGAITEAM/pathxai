@@ -69,16 +69,19 @@
                 <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Ana Sayfa</a>
               </li> --}}
               <li class="nav-item active">
-                <a class="nav-link fw-medium" href="#">YZ Teşhis Asistanı</a>
+                <a class="nav-link fw-medium" href="#">{{ __('nav_predict') }}</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link fw-medium" href="/patch-explorer">{{ __('nav_patch') }}</a>
+              </li>
+              {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
+              </li> --}}
+              <li class="nav-item">
+                <a class="nav-link fw-medium" href="/abstract">{{ __('nav_abstract') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/abstract">Özet</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
+                <a class="nav-link fw-medium" href="/#landingTeam">{{ __('nav_team') }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/api-docs">API</a>

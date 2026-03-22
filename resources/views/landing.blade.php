@@ -70,6 +70,9 @@
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/predict">{{ __('nav_predict') }}</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link fw-medium" href="/patch-explorer">{{ __('nav_patch') }}</a>
+              </li>
               {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
               </li> --}}

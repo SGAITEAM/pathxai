@@ -4,7 +4,7 @@
     "nav_abstract": "Samenvatting",
     "nav_team": "Team",
     "nav_api": "API",
-    "nav_login": "Inloggen\/Registreren",
+    "nav_login": "Inloggen/Registreren",
     "hero_title": "Kankerdetectie in Histopathologische Beelden en Verklaarbaar AI (XAI) Ondersteund Beslissysteem",
     "hero_subtitle": "Dit project heeft als doel het klinische besluitvormingsproces te ondersteunen door kankercellen te detecteren en classificeren uit histopathologische beelden.",
     "hero_tubitak": "TÜBİTAK 2204-A",
@@ -68,7 +68,7 @@
     "abstract_kw_deep_learning": "Deep Learning",
     "abstract_kw_xai": "Verklaarbare Kunstmatige Intelligentie",
     "api_predict_file_title": "Predict — Bestandsupload",
-    "api_predict_file_desc": "Retourneert procentuele inferentieresultaten voor beeldbestanden verzonden naar Borst\/Long\/Dikkedarm\/HCD-modellen.",
+    "api_predict_file_desc": "Retourneert procentuele inferentieresultaten voor beeldbestanden verzonden naar Borst/Long/Dikkedarm/HCD-modellen.",
     "api_example_response": "Voorbeeldrespons:",
     "api_predict_base64_title": "Predict — Base64",
     "api_predict_base64_desc": "Retourneert procentuele inferentieresultaten voor Base64-gecodeerde beeldbestanden.",
@@ -106,5 +106,6 @@
     "Send Password Reset Link": "Resetlink Verzenden",
     "Name": "Naam",
     "Email Address": "E-mailadres",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "nav_patch": "WSI Verkennen"
 }

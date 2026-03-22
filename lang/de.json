@@ -106,5 +106,6 @@
     "Send Password Reset Link": "Link zum Zurücksetzen senden",
     "Name": "Name",
     "Email Address": "E-Mail-Adresse",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "nav_patch": "WSI Erkunden"
 }

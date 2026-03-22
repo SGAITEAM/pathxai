@@ -4,7 +4,7 @@
     "nav_abstract": "초록",
     "nav_team": "팀",
     "nav_api": "API",
-    "nav_login": "로그인\/회원가입",
+    "nav_login": "로그인/회원가입",
     "hero_title": "조직병리학 이미지에서의 암 검출 및 설명 가능한 AI(XAI) 지원 의사결정 시스템",
     "hero_subtitle": "이 프로젝트는 조직병리학 이미지에서 암세포를 검출하고 분류하여 임상 의사결정 과정을 지원하는 것을 목표로 합니다.",
     "hero_tubitak": "TÜBİTAK 2204-A",
@@ -68,7 +68,7 @@
     "abstract_kw_deep_learning": "딥러닝",
     "abstract_kw_xai": "설명 가능한 인공지능",
     "api_predict_file_title": "Predict — 파일 업로드",
-    "api_predict_file_desc": "유방\/폐\/대장\/HCD 모델에 전송된 이미지 파일의 백분율 추론 결과를 반환합니다.",
+    "api_predict_file_desc": "유방/폐/대장/HCD 모델에 전송된 이미지 파일의 백분율 추론 결과를 반환합니다.",
     "api_example_response": "응답 예시:",
     "api_predict_base64_title": "Predict — Base64",
     "api_predict_base64_desc": "Base64로 인코딩된 이미지 파일의 백분율 추론 결과를 반환합니다.",
@@ -106,5 +106,6 @@
     "Send Password Reset Link": "재설정 링크 전송",
     "Name": "이름",
     "Email Address": "이메일 주소",
-    "Dashboard": "대시보드"
+    "Dashboard": "대시보드",
+    "nav_patch": "WSI 탐색"
 }

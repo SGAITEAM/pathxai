@@ -22,6 +22,10 @@ Route::get('/api-docs', function () {
     return view('apiDocs');
 });
 
+Route::get('/patch-explorer', function () {
+    return view('patchExplorer');
+});
+
 
 
 // Predict POST Rotaları

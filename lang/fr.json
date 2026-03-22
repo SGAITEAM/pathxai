@@ -106,5 +106,6 @@
     "Send Password Reset Link": "Envoyer le lien de réinitialisation",
     "Name": "Nom",
     "Email Address": "Adresse e-mail",
-    "Dashboard": "Tableau de bord"
+    "Dashboard": "Tableau de bord",
+    "nav_patch": "WSI Explorer"
 }
