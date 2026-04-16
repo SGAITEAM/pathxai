@@ -73,9 +73,9 @@
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/predict-wsi">WSI İncele</a>
               </li>
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
-              </li> --}}
+              </li>
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/abstract">Özet</a>
               </li>
