@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Path-XAI - WSI Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
+    <title>{{ __('Path-XAI - WSI Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti') }}</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -45,7 +45,7 @@
           <!-- Menu logo wrapper: Start -->
           <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8 ms-0">
             <!-- Mobile menu toggle: Start-->
-            <button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
               <i class="icon-base ti tabler-menu-2 icon-lg align-middle text-heading fw-medium"></i>
             </button>
             <!-- Mobile menu toggle: End-->
@@ -55,13 +55,13 @@
                   <img src="img/logo.png" alt="" width="64" height="64" />
                 </span>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">PathXAI</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ __('PathXAI') }}</span>
             </a>
           </div>
           <!-- Menu logo wrapper: End -->
           <!-- Menu wrapper: Start -->
           <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
-            <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
               <i class="icon-base ti tabler-x icon-lg"></i>
             </button>
             <ul class="navbar-nav me-auto">
@@ -69,22 +69,25 @@
                 <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Ana Sayfa</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/predict">YZ Teşhis Asistanı</a>
+                <a class="nav-link fw-medium" href="/predict">{{ __('YZ Teşhis Asistanı') }}</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link fw-medium" href="/predict-wsi">WSI İncele</a>
+                <a class="nav-link fw-medium" href="/predict-wsi">{{ __('WSI İncele') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
+                <a class="nav-link fw-medium" href="/project-presentation">{{ __('Proje Sunumu') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/abstract">Özet</a>
+                <a class="nav-link fw-medium" href="/abstract">{{ __('Özet') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
+                <a class="nav-link fw-medium" href="/#landingTeam">{{ __('Takım') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/api-docs">API</a>
+                <a class="nav-link fw-medium" href="/api-docs">{{ __('API') }}</a>
+	      </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link fw-medium" href="{{ route('dashboard') }}">{{ __('Giriş/Kayıt') }}</a>
               </li>
             </ul>
           </div>
@@ -92,59 +95,51 @@
           <!-- Menu wrapper: End -->
           <!-- Toolbar: Start -->
           <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <!-- Style Switcher -->
-            <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
+            <!-- Language Switcher -->
+            <li class="nav-item dropdown me-2 me-xl-1">
               <a
                 class="nav-link dropdown-toggle hide-arrow"
-                id="nav-theme"
+                id="nav-language"
                 href="javascript:void(0);"
                 data-bs-toggle="dropdown">
-                <i class="icon-base ti tabler-sun icon-lg theme-icon-active"></i>
-                <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
+                <i class="icon-base ti tabler-language icon-lg"></i>
+                <span class="d-none ms-2" id="nav-language-text">{{ __('Dil') }}</span>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-language-text">
                 <li>
-                  <button
-                    type="button"
-                    class="dropdown-item align-items-center active"
-                    data-bs-theme-value="light"
-                    aria-pressed="false">
-                    <span><i class="icon-base ti tabler-sun icon-md me-3" data-icon="sun"></i>Light</span>
-                  </button>
+                  <a href="/lang/tr" class="dropdown-item align-items-center {{ app()->getLocale() === 'tr' ? 'active' : '' }}">
+                    <span>
+                      @if (app()->getLocale() === 'tr')
+                        <i class="icon-base ti tabler-check icon-md me-3"></i>
+                      @else
+                        <span class="d-inline-block me-3" style="width: 1.25rem;"></span>
+                      @endif
+                      {{ __('Türkçe') }}
+                    </span>
+                  </a>
                 </li>
                 <li>
-                  <button
-                    type="button"
-                    class="dropdown-item align-items-center"
-                    data-bs-theme-value="dark"
-                    aria-pressed="true">
-                    <span><i class="icon-base ti tabler-moon-stars icon-md me-3" data-icon="moon-stars"></i>Dark</span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    class="dropdown-item align-items-center"
-                    data-bs-theme-value="system"
-                    aria-pressed="false">
-                    <span
-                      ><i
-                        class="icon-base ti tabler-device-desktop-analytics icon-md me-3"
-                        data-icon="device-desktop-analytics"></i
-                      >System</span
-                    >
-                  </button>
+                  <a href="/lang/en" class="dropdown-item align-items-center {{ app()->getLocale() === 'en' ? 'active' : '' }}">
+                    <span>
+                      @if (app()->getLocale() === 'en')
+                        <i class="icon-base ti tabler-check icon-md me-3"></i>
+                      @else
+                        <span class="d-inline-block me-3" style="width: 1.25rem;"></span>
+                      @endif
+                      {{ __('English') }}
+                    </span>
+                  </a>
                 </li>
               </ul>
             </li>
-            <!-- / Style Switcher-->
+            <!-- / Language Switcher-->
 
             <!-- navbar button: Start -->
-            <li>
-              <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self"
-                ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
-                ><span class="d-none d-md-block">Giriş/Kayıt</span></a
-              >
+            <li class='d-none d-md-block'>
+              <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self">
+                <span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span>
+                <span class="d-none d-md-block">{{ __('Giriş/Kayıt') }}</span>
+              </a>
             </li>
             <!-- navbar button: End -->
           </ul>
@@ -159,18 +154,18 @@
       <section id="landing-predict-app" class="section-py bg-body landing-reviews">
         <div class="container">
           <h4 class="text-center mb-3 mt-3">
-            <span class="position-relative fw-extrabold z-1">WSI Histopatoloji Görüntüleri 
-              <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
+            <span class="position-relative fw-extrabold z-1">{{ __('WSI Histopatoloji Görüntüleri') }}
+              <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="{{ __('laptop charging') }}" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
-            Üzerinden Kanser Tespiti
+            {{ __('Üzerinden Kanser Tespiti') }}
           </h4>
-          <p class="text-center mb-6 pb-md-4">Görüntü hangi dokuya ait ise ilgili modeli seçmeniz gerekmektedir.</p>
+          <p class="text-center mb-6 pb-md-4">{{ __('Görüntü hangi dokuya ait ise ilgili modeli seçmeniz gerekmektedir.') }}</p>
           <div class="row g-6">
             <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12">
               <div class="card card-contact h-100">
                 <div class="card-body p-3">
                   <div class="contact-img-box position-relative border p-2 h-100" style="border-radius: 0;">
-                    <img id="imgRes" src="/img/placeholder.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" style="border-radius: 0;">
+                    <img id="imgRes" src="/img/placeholder.png" alt="{{ __('contact customer service') }}" class="contact-img w-100 scaleX-n1-rtl" style="border-radius: 0;">
                     <span class="loader"></span>
                     <div class="p-4 pb-2">
                       <div class="row g-4">
@@ -180,7 +175,7 @@
                               <i class="icon-base ti tabler-upload icon-lg"></i>
                             </div>
                             <div>
-                              <p class="mb-0">Görsel Yükleyin</p>
+                              <p class="mb-0">{{ __('Görsel Yükleyin') }}</p>
                             </div>
                           </div>
                         </div>
@@ -195,7 +190,7 @@
                 <div class="card-body">
                   {{-- <h4 class="mb-2 px-6">Lütfen Model Seçin</h4> --}}
                   <p class="mb-6 px-6">
-                    Lütfen Yüklediğiniz Histopatoloji Görüntüsünün ait olduğu <strong>doku tipinine ait modeli</strong> seçiniz.
+                    {{ __('Lütfen Yüklediğiniz Histopatoloji Görüntüsünün ait olduğu') }} <strong>{{ __('doku tipinine ait modeli') }}</strong> {{ __('seçiniz.') }}
                   </p>
                     <div class="row g-4">
                       {{-- Form --}}
@@ -212,7 +207,7 @@
                                       <path d="M34.2185 38.5541C33.6042 39.4338 33 40.5619 33 41.596C33 42.9237 34.1193 44 35.5 44C36.8807 44 38 42.9237 38 41.596C38 40.5619 37.3958 39.4338 36.7815 38.5541C36.1462 37.6442 35.5 37 35.5 37C35.5 37 34.8538 37.6442 34.2185 38.5541Z" fill="currentColor"/>
                                       <path d="M32 34.7576C32 34.1371 32.3625 33.4603 32.7311 32.9324C33.1123 32.3865 33.5 32 33.5 32C33.5 32 33.8877 32.3865 34.2689 32.9324C34.6375 33.4603 35 34.1371 35 34.7576C35 35.5542 34.3284 36.2 33.5 36.2C32.6716 36.2 32 35.5542 32 34.7576Z" fill="currentColor"/>
                                     </svg>
-                                    <span class="custom-option-title"> Göğüs <br> Kanseri </span>
+                                    <span class="custom-option-title"> {{ __('Göğüs') }} <br> {{ __('Kanseri') }} </span>
                                   </span>
                                   <input name="aiModel" class="form-check-input" type="radio" value="breast" id="breast" checked="">
                                 </label>
@@ -226,7 +221,7 @@
                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3162 6.05134C10.7923 5.8767 10.226 6.15986 10.0513 6.6838C9.87667 7.20774 10.1598 7.77406 10.6838 7.94871C11.1185 8.09363 11.8342 8.42295 12.5717 8.92399C11.7738 9.3913 10.0154 10 7 10C6.44772 10 6 10.4477 6 11C6 11.5523 6.44772 12 7 12C10.7075 12 13.0328 11.1499 14.1174 10.2867C14.2847 10.4839 14.4403 10.6924 14.5793 10.9121C14.0887 12.0376 14.3475 13.5099 15.3393 14.6136C16.1848 15.5546 17.3534 15.9945 18.4055 15.8757C18.4388 15.935 18.4778 16.012 18.5199 16.1092C18.6689 16.4529 18.858 17.0548 18.9586 18.0269C18.8789 18.0784 18.8014 18.1343 18.7264 18.1947C17.8728 18.8819 17.5168 19.9997 17.6525 21.1918C17.6366 21.1936 17.6202 21.1954 17.6032 21.1971C17.3436 21.2227 17.0274 21.2269 16.6761 21.2133C16.1057 21.1912 15.4973 21.1249 14.9818 21.0569C14.9362 19.5927 13.6562 18.2909 11.9201 18.0407C11.4174 17.9682 10.9265 17.9911 10.4716 18.0941C10.4442 18.0608 10.4082 18.0113 10.3682 17.9414C10.223 17.6873 10 17.1174 10 16C10 15.4477 9.55228 15 9 15C8.44772 15 8 15.4477 8 16C8 17.3827 8.27697 18.3128 8.63176 18.9337C8.66054 18.984 8.68968 19.0321 8.71902 19.0779C8.54752 19.2643 8.40209 19.4709 8.2879 19.6942C7.66316 19.5888 6.87723 19.5 6 19.5C5.44772 19.5 5 19.9477 5 20.5C5 21.0523 5.44772 21.5 6 21.5C6.83061 21.5 7.57025 21.5941 8.13091 21.6974C8.50044 22.8427 9.62579 23.772 11.0642 23.9793C12.3253 24.1611 13.5123 23.7425 14.2426 22.9664C14.2803 22.9764 14.319 22.9843 14.3586 22.99C14.9521 23.0748 15.7925 23.1806 16.5989 23.2118C17.0018 23.2274 17.4168 23.2252 17.7999 23.1874C17.9567 23.1719 18.1235 23.1491 18.2914 23.1138C18.4426 23.3817 18.6194 23.6434 18.8217 23.8948C20.3146 25.7493 22.6568 26.3658 24.1748 25.349C24.5921 25.6171 25.0921 25.9015 25.6408 26.1567C26.0597 26.3516 26.5224 26.5366 27.0108 26.6835L26.9951 26.7116C26.7532 27.146 26.5741 27.5947 26.4552 28.0434C25.4891 28.1415 24.632 28.3974 23.9193 28.718C23.4227 28.9414 22.9687 29.2093 22.5887 29.4966C21.7499 28.873 20.5398 28.6583 19.3473 29.0226C17.9962 29.4353 17.0417 30.4771 16.8147 31.6265C16.0645 31.6592 15.1583 31.6179 14.2187 31.5294C13.6358 31.4746 13.0597 31.4036 12.528 31.3279C12.4833 30.6415 12.236 29.9324 11.7779 29.3035C11.3298 28.6884 10.7468 28.2417 10.1229 27.9857C10.1362 27.9263 10.1507 27.8662 10.1667 27.8059C10.2971 27.3133 10.4875 26.9267 10.7071 26.7071C11.0976 26.3166 11.0976 25.6834 10.7071 25.2929C10.3166 24.9024 9.68342 24.9024 9.29289 25.2929C8.71248 25.8733 8.40288 26.6535 8.23329 27.2941C8.1842 27.4796 8.14423 27.6635 8.11214 27.8411C8.03516 27.8632 7.95913 27.8887 7.88424 27.9178C7.61112 27.4123 7.22216 26.808 6.70711 26.2929C6.31658 25.9024 5.68342 25.9024 5.29289 26.2929C4.90237 26.6834 4.90237 27.3166 5.29289 27.7071C5.68594 28.1002 6.0041 28.6193 6.23057 29.0722C6.29251 29.1961 6.34569 29.3112 6.39001 29.4123C5.97696 30.4438 6.1427 31.758 6.92829 32.8364C8.06647 34.3988 10.0748 34.8745 11.4139 33.8989C11.6552 33.7231 11.8583 33.5122 12.0225 33.2755C12.6446 33.3676 13.3327 33.4549 14.0313 33.5206C15.0821 33.6195 16.2188 33.6763 17.2062 33.607C17.3362 33.8005 17.4912 33.9758 17.6668 34.131C17.3245 34.5914 16.9319 35.1035 16.5631 35.5548C16.3112 35.8632 16.0818 36.1289 15.8942 36.3265C15.4164 36.021 14.8496 35.8009 14.2261 35.7021C12.2123 35.3832 10.3696 36.4512 10.1105 38.0877C9.85126 39.7241 11.2737 41.3093 13.2875 41.6283C15.3013 41.9472 17.1439 40.8792 17.4031 39.2427C17.4799 38.7577 17.4091 38.2773 17.2189 37.8329L17.2305 37.8212C17.499 37.5503 17.807 37.1933 18.1119 36.8203C18.6174 36.2016 19.1566 35.4865 19.568 34.9217C20.0608 34.968 20.5822 34.919 21.1002 34.7608C22.818 34.236 23.8947 32.6945 23.6502 31.2076C23.8776 31.015 24.2365 30.7683 24.7397 30.542C25.1911 30.3389 25.7263 30.1681 26.3284 30.0752C26.4862 31.1225 27.006 32.0274 27.8492 32.5578C27.784 32.9066 27.7187 33.3444 27.6894 33.8126C27.6549 34.3649 27.667 35.01 27.8189 35.6176C27.9125 35.9918 28.0694 36.3899 28.3297 36.7427C27.6392 38.2095 28.5193 40.1194 30.3279 41.043C32.1658 41.9817 34.2666 41.5465 35.0202 40.071C35.1094 39.8965 35.1756 39.7153 35.2202 39.5298C35.5698 39.5274 36.013 39.5053 36.5145 39.437L36.5307 39.4348C36.8187 39.7003 37.2093 40.0291 37.6527 40.3487C38.2263 40.7622 38.9458 41.2027 39.6838 41.4487C40.2077 41.6234 40.774 41.3402 40.9487 40.8163C41.1233 40.2923 40.8402 39.726 40.3162 39.5513C39.8812 39.4063 39.3854 39.1234 38.9103 38.7891C39.5229 38.5294 40.1469 38.1806 40.7419 37.713C41.1761 37.3717 41.2515 36.7431 40.9102 36.3088C40.5689 35.8746 39.9403 35.7993 39.506 36.1405C38.4477 36.9723 37.2304 37.3212 36.2448 37.4553C35.7559 37.5219 35.3372 37.5337 35.0446 37.5291C35.0057 37.5285 34.9691 37.5276 34.935 37.5265C34.8885 37.4354 34.8377 37.3453 34.7828 37.2567C34.3979 36.6359 33.8073 36.0829 33.0569 35.6996C31.9698 35.1444 30.7907 35.0698 29.8529 35.4069C29.8191 35.3341 29.7871 35.244 29.7592 35.1325C29.6767 34.8026 29.6576 34.3852 29.6855 33.9374C29.7061 33.6084 29.7503 33.29 29.7982 33.0187C31.2169 32.9044 32.6801 31.9328 33.5539 30.3636C34.6881 28.3265 34.4431 25.9757 33.0666 24.7886C33.1908 23.731 33.4685 23.0546 33.7236 22.6346C34.556 23.2493 35.6894 23.5549 36.8845 23.3951C39.1069 23.098 40.7008 21.304 40.4447 19.388C40.4169 19.1805 40.3686 18.9802 40.3017 18.7881C40.7386 18.4459 41.2286 18.0215 41.6904 17.5488C42.4198 16.802 43.2032 15.8102 43.4701 14.7426C43.6041 14.2068 43.2783 13.6638 42.7425 13.5299C42.2067 13.3959 41.6638 13.7217 41.5299 14.2575C41.475 14.477 41.3634 14.7208 41.2042 14.9796C41.0874 14.6952 41 14.3593 41 14C41 13.4477 40.5523 13 40 13C39.4477 13 39 13.4477 39 14C39 15.0717 39.4031 15.982 39.8035 16.5917C39.5591 16.8151 39.3154 17.0194 39.0898 17.1969C38.2601 16.596 37.1386 16.2989 35.9569 16.4569C34.4354 16.6603 33.2085 17.5653 32.6681 18.7307C32.0384 18.6158 31.4718 18.4009 31.0039 18.1709C30.8431 18.0918 30.6962 18.0121 30.5649 17.9358C30.7728 17.1663 30.7107 16.279 30.3383 15.4442C30.6595 15.2656 31.0406 15.0372 31.4415 14.7616C32.2662 14.1946 33.2618 13.3692 33.9472 12.2995C34.0484 12.3663 34.1542 12.4276 34.2641 12.4832C35.0332 12.8722 36.0011 12.9806 36.968 12.7142C38.8316 12.2007 39.9855 10.4896 39.5454 8.89226C39.1053 7.29492 37.2378 6.41626 35.3743 6.92971C33.5107 7.44316 32.3568 9.15428 32.7969 10.7516C32.8255 10.8555 32.8601 10.9563 32.9004 11.0539L29.6318 14.3608C29.1189 13.7989 28.4743 13.4225 27.8063 13.2756L27.7301 12.9014C27.681 12.6594 27.6372 12.4355 27.6013 12.2384C28.5628 11.8611 29.3346 10.9841 29.5719 9.84907C29.9354 8.1099 28.9063 6.42332 27.2733 6.08199C25.6403 5.74065 24.0218 6.87382 23.6583 8.61299C23.3237 10.2134 24.1685 11.7693 25.578 12.2734C25.6328 12.6198 25.7072 12.9892 25.7699 13.2987L25.8263 13.5757C25.6562 13.6771 25.5008 13.7961 25.3608 13.9298C24.3807 14.8662 24.1547 16.5281 24.9039 17.9824C25.7891 19.7008 27.7008 20.4787 29.1737 19.7199C29.2573 19.6768 29.3377 19.6297 29.4149 19.5788C29.6186 19.7023 29.8555 19.8349 30.1215 19.9657C30.7371 20.2683 31.5296 20.5716 32.4424 20.7214C32.4584 20.7933 32.4768 20.8641 32.4977 20.934C32.3916 21.0548 32.2842 21.1908 32.1782 21.3437C31.7454 21.968 31.3577 22.8403 31.153 24.0473C30.2537 24.0148 29.3115 24.3439 28.4928 24.9663C27.8367 24.8824 27.1415 24.649 26.4842 24.3433C26.0538 24.1431 25.6617 23.9223 25.3346 23.7164C25.6973 22.4418 25.3404 20.8295 24.2746 19.5054C23.3499 18.3567 22.0993 17.683 20.9205 17.5782C20.796 16.563 20.5798 15.8326 20.3551 15.314C20.2942 15.1735 20.2329 15.049 20.1728 14.9388C21.1276 13.7894 20.9944 11.9302 19.8023 10.6034C18.7654 9.44945 17.2426 9.04907 16.0446 9.50844C14.6262 7.52051 12.3519 6.39656 11.3162 6.05134ZM26.3661 10.4224C25.9286 10.3309 25.4538 9.79815 25.616 9.02219C25.7781 8.24623 26.4266 7.94824 26.8641 8.03968C27.3016 8.13112 27.7764 8.66391 27.6142 9.43987C27.452 10.2158 26.8035 10.5138 26.3661 10.4224ZM36.2219 18.4392C37.1719 18.3122 37.8233 18.6532 38.1709 19.0591C38.1975 19.0985 38.2263 19.1354 38.2572 19.1698C38.374 19.3348 38.4424 19.5044 38.4623 19.6531C38.5366 20.2084 38.0333 21.2238 36.6195 21.4128C35.2057 21.6018 34.4534 20.7543 34.3791 20.199C34.3049 19.6437 34.8082 18.6283 36.2219 18.4392ZM18.8033 13.0783C18.7954 12.74 18.654 12.3178 18.3146 11.9401C17.9753 11.5625 17.5706 11.3768 17.235 11.3329C16.9049 11.2897 16.6923 11.3813 16.5682 11.4927C16.4442 11.6042 16.3304 11.8058 16.3382 12.1387C16.3461 12.477 16.4876 12.8992 16.8269 13.2769C17.1663 13.6545 17.571 13.8402 17.9066 13.8841C18.2367 13.9273 18.4493 13.8357 18.5733 13.7243C18.6974 13.6128 18.8111 13.4112 18.8033 13.0783ZM36.4368 10.786C35.9473 10.9209 35.5063 10.8588 35.2001 10.7147C34.8989 10.573 34.7693 10.3812 34.725 10.2204C34.6807 10.0596 34.6937 9.82844 34.8799 9.55244C35.0691 9.27185 35.416 8.99273 35.9055 8.85786C36.395 8.72299 36.8359 8.78505 37.1422 8.92913C37.4434 9.07086 37.5729 9.2627 37.6172 9.4235C37.6616 9.5843 37.6485 9.81543 37.4624 10.0914C37.2732 10.372 36.9263 10.6511 36.4368 10.786ZM28.644 17.3755C28.7221 17.0462 28.6923 16.6019 28.4597 16.1505C28.2272 15.6992 27.8828 15.417 27.5693 15.2894C27.261 15.1639 27.0321 15.1987 26.8838 15.275C26.7356 15.3514 26.5744 15.5176 26.4976 15.8415C26.4195 16.1708 26.4493 16.6151 26.6818 17.0665C26.9143 17.5178 27.2588 17.8 27.5722 17.9276C27.8806 18.0531 28.1095 18.0183 28.2577 17.942C28.406 17.8656 28.5671 17.6994 28.644 17.3755ZM11.6348 20.0202C12.1374 20.0926 12.5165 20.3261 12.7394 20.5807C12.9587 20.8312 13.0006 21.0589 12.9768 21.224C12.953 21.389 12.8485 21.5956 12.5675 21.774C12.2817 21.9553 11.8521 22.0722 11.3495 21.9997C10.847 21.9273 10.4678 21.6939 10.2449 21.4392C10.0256 21.1888 9.98371 20.9611 10.0075 20.796C10.0313 20.6309 10.1358 20.4243 10.4169 20.246C10.7026 20.0646 11.1323 19.9478 11.6348 20.0202ZM12.3352 39.0163C12.5844 39.2941 13.0184 39.5607 13.6004 39.6529C14.1823 39.745 14.6775 39.6256 15.0003 39.4384C15.3187 39.2539 15.4082 39.0531 15.4277 38.9298C15.4473 38.8066 15.4242 38.588 15.1784 38.3141C14.9292 38.0363 14.4951 37.7697 13.9132 37.6775C13.3313 37.5853 12.8361 37.7048 12.5132 37.892C12.1948 38.0765 12.1053 38.2773 12.0858 38.4005C12.0663 38.5238 12.0894 38.7424 12.3352 39.0163ZM19.9316 30.9353C20.4172 30.787 20.8596 30.8368 21.1697 30.9724C21.4748 31.1057 21.6096 31.2939 21.6583 31.4535C21.707 31.613 21.7004 31.8444 21.522 32.1254C21.3406 32.4111 21.0015 32.6997 20.5159 32.8481C20.0303 32.9964 19.5879 32.9466 19.2778 32.811C18.9727 32.6776 18.8379 32.4894 18.7892 32.3299C18.7405 32.1704 18.7471 31.939 18.9255 31.658C19.1069 31.3723 19.446 31.0837 19.9316 30.9353ZM10.5312 31.6633C10.5579 31.326 10.4603 30.8915 10.1614 30.4811C9.86239 30.0707 9.47879 29.8447 9.14946 29.7667C8.82553 29.69 8.60468 29.7593 8.46986 29.8576C8.33505 29.9558 8.20129 30.1447 8.17501 30.4766C8.14829 30.8139 8.24585 31.2484 8.54482 31.6588C8.84379 32.0692 9.22739 32.2952 9.55672 32.3732C9.88065 32.45 10.1015 32.3806 10.2363 32.2824C10.3711 32.1841 10.5049 31.9952 10.5312 31.6633ZM32.1472 37.4807C32.6885 37.7572 33.0296 38.1553 33.186 38.5034C33.3403 38.847 33.2914 39.0589 33.2391 39.1613C33.1868 39.2636 33.0439 39.4275 32.675 39.5039C32.3013 39.5813 31.7788 39.5383 31.2375 39.2619C30.6963 38.9855 30.3551 38.5873 30.1988 38.2393C30.0444 37.8956 30.0934 37.6837 30.1457 37.5814C30.1979 37.479 30.3409 37.3152 30.7098 37.2387C31.0834 37.1613 31.6059 37.2043 32.1472 37.4807ZM23.1158 23.6476C23.4194 23.4031 23.894 22.2221 22.7166 20.7595C21.5393 19.2969 20.2842 19.5083 19.9805 19.7527C19.6769 19.9971 19.2023 21.1781 20.3797 22.6407C21.5571 24.1033 22.8122 23.892 23.1158 23.6476ZM31.8065 29.3906C30.8671 31.0776 29.4636 31.1725 28.9626 30.8936C28.4617 30.6147 27.8031 29.3716 28.7425 27.6846C29.6818 25.9975 31.0854 25.9026 31.5863 26.1815C32.0873 26.4605 32.7458 27.7036 31.8065 29.3906Z" fill="currentColor"/>
                                     </svg>
 
-                                    <span class="custom-option-title"> Metastas Göğüs (Lenf) </span>
+                                    <span class="custom-option-title"> {{ __('Metastas Göğüs (Lenf)') }} </span>
                                   </span>
                                   <input name="aiModel" class="form-check-input" type="radio" value="hcd" id="hcd">
                                 </label>
@@ -239,7 +234,7 @@
                                     <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M23 6.00013C23 6.00004 23 6 24 6H24.1761C24.2533 6 24.3233 6 24.3868 6C25 6.00001 25 6.00005 25 6.00013V20.5C25 21.8977 25.5641 22.4421 26.0039 22.6987C26.053 22.7273 26.1024 22.7533 26.1516 22.777C26.1506 22.6568 26.1493 22.5316 26.1479 22.4019L26.1479 22.4003C26.1101 18.8716 26.0365 11.9997 31.4753 11.9997C38.9259 11.9997 44.2478 38.0062 41.0547 40.6599C37.8615 43.3136 31.4753 41.7214 28.2822 38.5369C25.7042 35.9659 25.9272 29.9583 26.0873 25.6457L26.0874 25.6443C26.0971 25.3819 26.1067 25.1258 26.1153 24.8771C25.79 24.7962 25.3959 24.6595 24.9962 24.4263C24.6398 24.2184 24.2975 23.9442 24 23.5919C23.7026 23.9442 23.3603 24.2184 23.0039 24.4263C22.6041 24.6595 22.2101 24.7962 21.8848 24.8771C21.8934 25.1261 21.9029 25.3826 21.9127 25.6453C22.0728 29.9579 22.2959 35.9662 19.7179 38.5372C16.5247 41.7217 10.1385 43.3139 6.94536 40.6602C3.75222 38.0065 9.07413 12 16.5247 12C21.9636 12 21.89 18.8717 21.8522 22.4003C21.852 22.4166 21.8518 22.4328 21.8516 22.4489C21.8504 22.5619 21.8493 22.6714 21.8484 22.777C21.8977 22.7534 21.9471 22.7274 21.9962 22.6987C22.436 22.4421 23 21.8977 23 20.5V6.00013ZM31.4753 13.9997C30.5212 13.9997 29.9843 14.3002 29.6086 14.6869C29.1752 15.1331 28.8132 15.8507 28.559 16.8646C28.1141 18.6395 28.133 20.6819 28.1483 22.3293C28.1509 22.6142 28.1534 22.8874 28.1534 23.1453C28.1534 23.9053 28.1196 24.8153 28.0845 25.7621C28.0707 26.1349 28.0566 26.5133 28.0443 26.8905C27.9996 28.2657 27.9741 29.7055 28.0405 31.0982C28.1072 32.4985 28.2642 33.7835 28.5573 34.8596C28.8538 35.9483 29.2509 36.6784 29.6944 37.1208C30.9726 38.3954 32.9908 39.4251 35.0492 39.8243C37.0842 40.2189 38.7224 39.9269 39.6818 39.1969C39.6868 39.1857 39.6923 39.1726 39.6984 39.1574C39.7576 39.0095 39.8294 38.7554 39.8878 38.3683C40.0047 37.5933 40.035 36.5122 39.9562 35.1803C39.7995 32.5305 39.2286 29.1689 38.3268 25.8606C37.4216 22.5396 36.2173 19.3998 34.8521 17.1383C34.1688 16.0062 33.4951 15.1786 32.8703 14.6535C32.2518 14.1337 31.7935 13.9997 31.4753 13.9997ZM16.5247 14C17.4788 14 18.0158 14.3005 18.3914 14.6872C18.8248 15.1334 19.1868 15.851 19.441 16.8649C19.8859 18.6399 19.867 20.6822 19.8518 22.3296C19.8491 22.6146 19.8466 22.8877 19.8466 23.1456C19.8466 23.9056 19.8804 24.8156 19.9155 25.7624C19.9294 26.135 19.9434 26.5138 19.9557 26.8908C20.0005 28.266 20.0259 29.7058 19.9596 31.0985C19.8929 32.4988 19.7359 33.7838 19.4427 34.8599C19.1462 35.9486 18.7492 36.6787 18.3056 37.1211C17.0275 38.3957 15.0093 39.4254 12.9509 39.8246C10.9159 40.2192 9.27768 39.9272 8.31823 39.1972C8.31326 39.186 8.3077 39.1729 8.30162 39.1577C8.24241 39.0098 8.17061 38.7557 8.11224 38.3686C7.99539 37.5936 7.965 36.5125 8.0438 35.1806C8.20056 32.5308 8.77147 29.1692 9.67324 25.8609C10.5785 22.5399 11.7827 19.4001 13.1479 17.1386C13.8313 16.0065 14.5049 15.1789 15.1298 14.6538C15.7482 14.134 16.2065 14 16.5247 14Z" fill="currentColor"/>
                                     </svg>
-                                    <span class="custom-option-title"> Akciğer <br> Kanseri </span>
+                                    <span class="custom-option-title"> {{ __('Akciğer') }} <br> {{ __('Kanseri') }} </span>
                                   </span>
                                   <input name="aiModel" class="form-check-input" type="radio" value="lung" id="lung">
                                 </label>
@@ -253,7 +248,7 @@
                                       <path d="M6 12.1944C6 8.77335 8.77335 6 12.1944 6C13.6163 6 14.9271 6.47988 15.9723 7.28507C17.0174 6.47988 18.3282 6 19.7501 6C21.3959 6 22.8916 6.64243 24.0001 7.68804C25.1085 6.64243 26.6042 6 28.2501 6C29.6719 6 30.9827 6.47987 32.0278 7.28502C33.0729 6.47987 34.3837 6 35.8055 6C39.2266 6 42 8.77335 42 12.1944C42 13.6129 41.5223 14.921 40.7206 15.9649C41.5261 17.1052 42 18.498 42 20C42 21.6057 41.4585 23.0861 40.5496 24.2668C41.454 25.3431 42 26.7332 42 28.2501C42 31.6712 39.2267 34.4445 35.8056 34.4445C34.3837 34.4445 33.073 33.9646 32.0278 33.1595C31.7715 33.357 31.4992 33.5349 31.2131 33.691C31.2052 33.7087 31.1965 33.7297 31.1871 33.7542C31.1244 33.9175 31.06 34.1596 31 34.4761V42H29V34.3846C29 34.3253 29.0053 34.2662 29.0158 34.2078C29.0897 33.7964 29.1865 33.3849 29.32 33.0372C29.387 32.8629 29.4739 32.6758 29.5906 32.5038C29.7032 32.3376 29.8827 32.1274 30.156 31.9877C30.5851 31.7683 30.9721 31.4768 31.3007 31.1288C31.4896 30.9287 31.7526 30.8153 32.0278 30.8153C32.303 30.8153 32.566 30.9287 32.7549 31.1288C33.521 31.9402 34.6036 32.4445 35.8056 32.4445C38.1221 32.4445 40 30.5666 40 28.2501C40 26.9746 39.432 25.833 38.5316 25.0621C38.3181 24.8793 38.1913 24.6151 38.1824 24.3341C38.1736 24.0531 38.2833 23.7814 38.4849 23.5855C39.4206 22.6758 40 21.4064 40 20C40 18.6918 39.4989 17.503 38.6765 16.6112C38.308 16.2117 38.3261 15.5909 38.7173 15.2136C39.5093 14.4495 40 13.3801 40 12.1944C40 9.95267 38.2413 8.12165 36.0284 8.00582V8.03547C35.0773 8.03547 34.0984 8.50674 33.4631 9.27834C32.8483 10.025 32.566 11.0356 32.9487 12.1838C33.1234 12.7078 32.8402 13.2741 32.3162 13.4487C31.7923 13.6234 31.226 13.3402 31.0513 12.8162C30.6133 11.5022 30.7216 10.2536 31.185 9.19783C30.4275 8.45575 29.3927 8 28.2501 8C26.8323 8 25.5785 8.70248 24.8177 9.78286C24.6304 10.0488 24.3254 10.2071 24.0001 10.2071C23.6747 10.2071 23.3697 10.0488 23.1824 9.78286C22.4216 8.70248 21.1678 8 19.7501 8C18.548 8 17.4654 8.50432 16.6994 9.31573C16.5105 9.51584 16.2474 9.62925 15.9722 9.62925C15.6971 9.62925 15.434 9.51584 15.2451 9.31573C14.4791 8.50432 13.3965 8 12.1944 8C9.87792 8 8 9.87792 8 12.1944C8 13.3965 8.50432 14.4791 9.31573 15.2451C9.51585 15.434 9.62926 15.6971 9.62926 15.9723C9.62926 16.2475 9.51585 16.5105 9.31574 16.6994C8.50433 17.4654 8.00001 18.548 8.00001 19.7501C8.00001 21.1678 8.70249 22.4216 9.78287 23.1824C10.0489 23.3697 10.2071 23.6747 10.2071 24.0001C10.2071 24.3254 10.0489 24.6304 9.78287 24.8177C8.70249 25.5785 8.00001 26.8323 8.00001 28.2501C8.00001 30.2334 9.3775 31.8974 11.2291 32.3331C11.6808 32.4394 12 32.8425 12 33.3065V35.3335C12 35.8245 12.398 36.2224 12.8889 36.2224C13.3798 36.2224 13.7778 35.8245 13.7778 35.3336V32.7576C13.7778 32.3995 13.9692 32.0688 14.2797 31.8904C15.5422 31.1653 16.3889 29.806 16.3889 28.2501C16.3889 26.8323 15.6864 25.5785 14.606 24.8177C14.5496 24.7779 14.498 24.7328 14.4517 24.6834C13.7663 24.2325 12.9467 23.9999 11.9999 23.9999C11.4476 23.9999 10.9999 23.5522 10.9999 22.9999C10.9999 22.4477 11.4477 21.9999 11.9999 21.9999C13.1309 21.9999 14.1881 22.2486 15.1211 22.7549C15.9043 21.9921 16.3889 20.9276 16.3889 19.7501C16.3889 18.548 15.8846 17.4654 15.0732 16.6994C14.8731 16.5105 14.7596 16.2474 14.7596 15.9722C14.7596 15.697 14.8731 15.434 15.0732 15.2451C15.1321 15.1894 15.1894 15.1321 15.2451 15.0732C15.434 14.873 15.697 14.7596 15.9722 14.7596C16.2474 14.7596 16.5105 14.873 16.6994 15.0732C17.4654 15.8846 18.548 16.3889 19.7501 16.3889C21.1678 16.3889 22.4216 15.6864 23.1824 14.606C23.3697 14.34 23.6747 14.1818 24.0001 14.1818C24.3254 14.1818 24.6304 14.34 24.8177 14.606C25.5785 15.6864 26.8323 16.3889 28.2501 16.3889C28.6583 16.3889 29.0512 16.3309 29.422 16.2233C29.808 16.1112 30.2237 16.2412 30.4771 16.5533C30.7305 16.8654 30.7723 17.2989 30.5834 17.6537C30.2113 18.3523 30 19.15 30 20C30 20.9044 30.2393 21.7506 30.6579 22.4812C31.797 23.1214 32.5429 23.7528 32.9825 24.4854C33.5016 25.3507 33.5007 26.2228 33.5 26.9235L33.5 26.9999C33.5 27.5522 33.0523 27.9999 32.5 27.9999C31.9477 27.9999 31.5 27.5522 31.5 26.9999C31.5 26.2131 31.4793 25.8674 31.2675 25.5144C31.0944 25.2259 30.736 24.8519 29.9177 24.3637C29.8417 24.3547 29.7659 24.3368 29.6918 24.3097C29.2435 24.1456 28.7584 24.0556 28.2501 24.0556C25.9335 24.0556 24.0556 25.9335 24.0556 28.2501C24.0556 29.8786 24.9835 31.2922 26.3441 31.9877C26.4499 32.0418 26.5448 32.1054 26.6294 32.1739C26.8638 32.3637 27 32.6493 27 32.951V42H25V33.5242C23.2347 32.4342 22.0556 30.4806 22.0556 28.2501C22.0556 24.829 24.829 22.0556 28.2501 22.0556L28.307 22.0559C28.1074 21.4054 28 20.7149 28 20C28 19.446 28.0645 18.9063 28.1866 18.3886C26.5658 18.3723 25.0943 17.733 24.0001 16.7008C22.8916 17.7465 21.3959 18.3889 19.7501 18.3889C19.2116 18.3889 18.689 18.3201 18.1908 18.1908C18.3201 18.689 18.3889 19.2116 18.3889 19.7501C18.3889 21.3959 17.7465 22.8916 16.7009 24.0001C17.7465 25.1085 18.3889 26.6042 18.3889 28.2501C18.3889 30.3371 17.3563 32.182 15.7778 33.3033V35.3336C15.7778 36.929 14.4844 38.2224 12.8889 38.2224C11.2934 38.2224 10 36.929 10 35.3335V34.0442C7.66233 33.1583 6.00001 30.8993 6.00001 28.2501C6.00001 26.6042 6.64245 25.1085 7.68805 24.0001C6.64245 22.8916 6.00001 21.3959 6.00001 19.7501C6.00001 18.3282 6.47989 17.0174 7.28508 15.9723C6.47989 14.9271 6 13.6163 6 12.1944Z" fill="currentColor"/>
                                     </svg>
 
-                                    <span class="custom-option-title"> Kolon <br> Kanseri</span>
+                                    <span class="custom-option-title"> {{ __('Kolon') }} <br> {{ __('Kanseri') }}</span>
                                   </span>
                                   <input name="aiModel" class="form-check-input" type="radio" value="colon" id="colon">
                                 </label>
@@ -300,7 +295,7 @@
                         <!-- Patch önizleme (gizli başlayacak) -->
                         <div class="col-12 mt-6 d-none" id="patchPreviewSection">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                              <div class="fw-semibold">Patch Önizleme</div>
+                              <div class="fw-semibold">{{ __('Patch Önizleme') }}</div>
                               <div class="text-muted small" id="patchInfo"></div>
                             </div>
                             <div class="row g-2" id="patchGrid"></div>
@@ -314,8 +309,8 @@
                               <div class="card mt-6">
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                   <div class="card-title mb-0">
-                                    <h5 class="mb-1 me-2" id="pozitif">... % Pozitif</h5>
-                                    <p class="mb-0" id="pozitifSub">(Kanser Dokusu İçerir)</p>
+                                    <h5 class="mb-1 me-2 d-flex align-items-center gap-2"><i class="icon-base ti tabler-activity-heartbeat text-danger"></i><span id="pozitif">{{ __('... % Pozitif') }}</span></h5>
+                                    <p class="mb-0" id="pozitifSub">{{ __('(Kanser Dokusu İçerir)') }}</p>
                                   </div>
                                   <div class="card-icon">
                                     <span class="badge bg-label-danger rounded p-2">
@@ -349,8 +344,8 @@
                               <div class="card mt-6">
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                   <div class="card-title mb-0">
-                                    <h5 class="mb-1 me-2" id="negatif">... % Negatif</h5>
-                                    <p class="mb-0" id="negatifSub">(Kanser Dokusu İçermez)</p>
+                                    <h5 class="mb-1 me-2 d-flex align-items-center gap-2"><i class="icon-base ti tabler-circle-check text-success"></i><span id="negatif">{{ __('... % Negatif') }}</span></h5>
+                                    <p class="mb-0" id="negatifSub">{{ __('(Kanser Dokusu İçermez)') }}</p>
                                   </div>
                                   <div class="card-icon">
                                     <span class="badge bg-label-success rounded p-2">
@@ -401,12 +396,74 @@
       <!-- Prediction Form: End -->
     </div>
     <!-- / Sections:End -->
+
+    <div class="modal fade" id="patchModal" tabindex="-1" aria-labelledby="patchModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="patchModalLabel">{{ __('Patch İnceleme') }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('Close') }}"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-4 align-items-start">
+              <div class="col-lg-7">
+                <div class="modal-patch-box border rounded-3 p-2 bg-body-tertiary text-center position-relative">
+                  <img id="modalPatchImg" src="/img/placeholder.png" class="rounded-2" alt="{{ __('Seçilen patch') }}">
+                  <div class="modal-patch-loader d-none" id="modalPatchLoader">
+                    <div class="sk-grid" style="width: 3.7em; height: 3.7em">
+                      <div class="sk-grid-cube"></div><div class="sk-grid-cube"></div><div class="sk-grid-cube"></div>
+                      <div class="sk-grid-cube"></div><div class="sk-grid-cube"></div><div class="sk-grid-cube"></div>
+                      <div class="sk-grid-cube"></div><div class="sk-grid-cube"></div><div class="sk-grid-cube"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="small text-muted mt-2" id="modalPatchMeta">{{ __('Henüz patch seçilmedi.') }}</div>
+              </div>
+              <div class="col-lg-5">
+                <div class="d-grid gap-2 mb-3">
+                  <button type="button" class="btn btn-primary" id="modalPredictBtn">
+                    <i class="icon-base ti tabler-microscope me-1"></i>
+                    {{ __('İncele') }}
+                  </button>
+                </div>
+
+                <div class="res d-none" id="modalResultSection">
+                  <div class="card border shadow-none mb-3">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-2 mb-3">
+                        <span class="badge bg-label-danger rounded p-2"><i class="icon-base ti tabler-activity-heartbeat"></i></span>
+                        <div>
+                          <h6 class="mb-1 d-flex align-items-center gap-2"><span id="modalPozitif">{{ __('... % Pozitif') }}</span></h6>
+                          <p class="mb-0 text-muted" id="modalPozitifSub">{{ __('(Kanser Dokusu İçerir)') }}</p>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-start gap-2">
+                        <span class="badge bg-label-success rounded p-2"><i class="icon-base ti tabler-circle-check"></i></span>
+                        <div>
+                          <h6 class="mb-1 d-flex align-items-center gap-2"><span id="modalNegatif">{{ __('... % Negatif') }}</span></h6>
+                          <p class="mb-0 text-muted" id="modalNegatifSub">{{ __('(Kanser Dokusu İçermez)') }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="small text-muted" id="modalInfoText">
+                  {{ __('Patch seçildiğinde burada büyük gösterilir. XAI geldikten sonra görsel üzerine basılı tutunca orijinali görünür.') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer: Start -->
     <footer class="landing-footer bg-body footer-text">
       <div class="footer-top position-relative overflow-hidden z-1">
         <img
           src="../../assets/img/front-pages/backgrounds/footer-bg.png"
-          alt="footer bg"
+          alt="{{ __('footer bg') }}"
           class="footer-bg banner-bg-img z-n1" />
         <div class="container">
           <div class="row gx-0 gy-6 g-lg-10">
@@ -416,10 +473,10 @@
                   <img src="img/logo.png" alt="" width="40" height="40">
                   
                 </span>
-                <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">SG AI TEAM</span>
+                <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">{{ __('SG AI TEAM') }}</span>
               </a>
               <p class="footer-text footer-logo-description mb-6">
-                Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                {{ __('Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi') }}
               </p>
               </form>
             </div>
@@ -435,7 +492,7 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-           Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
+           {{ __('Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından') }} <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">{{ __('TÜBİTAK 2204-A') }}</a> {{ __('Yarışması için geliştirilmiştir.') }}
           </div>
           <div>
             <a href="https://github.com/SGAITEAM/pathxai " class="me-1 text-white" target="_blank">
@@ -467,6 +524,15 @@
     <script src="../../assets/js/front-main.js"></script>
     <!-- Page JS -->
     {{-- <script src="../../assets/js/front-page-landing.js"></script> --}}
+
+  <style>
+    .patch-card{cursor:pointer; transition:all .15s ease;}
+    .patch-card:hover{transform:translateY(-2px); box-shadow:0 .35rem .9rem rgba(0,0,0,.14);}
+    .modal-patch-box{aspect-ratio:1/1; min-height:420px; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+    #modalPatchImg{width:100%; height:100%; object-fit:contain; background:#fff;}
+    .modal-patch-loader{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.72); z-index:5;}
+  </style>
+
   </body>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -494,6 +560,126 @@
 
       let selectedImage = null;
       let imgMsg = $("#imgMsg");
+      let selectedPatchFile = null;
+      let selectedPatchKey = null;
+      let modalOriginalImage = null;
+      let modalXaiImage = null;
+      const patchResultCache = {};
+      const patchModalEl = document.getElementById("patchModal");
+      const patchModal = patchModalEl ? new bootstrap.Modal(patchModalEl) : null;
+      const translations = {
+          positiveSuffix: @json(__('% Pozitif')),
+          negativeSuffix: @json(__('% Negatif')),
+          acaLabel: @json(__('ACA')),
+          sccLabel: @json(__('SCC')),
+          normalTissueLabel: @json(__('Normal Doku')),
+          containsCancerTissue: @json(__('(Kanser Dokusu İçerir)')),
+          doesNotContainCancerTissue: @json(__('(Kanser Dokusu İçermez)')),
+          patchReviewedHoldOriginal: @json(__('Bu patch incelendi. Görsel üzerine basılı tutunca orijinali görebilirsiniz.')),
+          patchReviewedResultShown: @json(__('Bu patch incelendi. Sonuç yukarıda gösteriliyor.')),
+          noFile: @json(__('Dosya yok')),
+          jpgOnly: @json(__('Sadece JPG (image/jpeg) kabul ediliyor.')),
+          fileReadError: @json(__('Dosya okunamadı.')),
+          imageLoadError: @json(__('Görsel yüklenemedi.')),
+          resizeError: @json(__('Küçültme sırasında hata oluştu.')),
+          imageBlobReadError: @json(__('Görsel okunamadı.')),
+          blobCreateError: @json(__('Blob üretilemedi.')),
+          previewShownLimited: @json(__('Önizleme için')),
+          shownCount: @json(__('adet gösterildi.')),
+          whiteIgnoredTotalGrid: @json(__('(Beyaz ignore hariç) Toplam grid:')),
+          shownLabel: @json(__('Gösterilen')),
+          ignoredWhiteLabel: @json(__('Ignore (beyaz)')),
+          cellLabel: @json(__('Hücre')),
+          selectImageFirstTitle: @json(__('Önce görsel seçin')),
+          splitReadySuffix: @json(__('bölme hazır')),
+          splitErrorTitle: @json(__('Bölme Hatası')),
+          patchMetaPrefix: @json(__('Patch #')),
+          gridLabel: @json(__('Grid')),
+          patchSelectForInference: @json(__('Patch seçildi. Tekil inference için')),
+          reviewButtonLabel: @json(__('İncele')),
+          pressButtonSuffix: @json(__('butonuna basın.')),
+          patchOpenErrorTitle: @json(__('Patch açılamadı')),
+          patchOpenErrorText: @json(__('Seçilen patch hazırlanırken bir hata oluştu.')),
+          patchMissingTitle: @json(__('Patch Eksik')),
+          patchMissingText: @json(__('Lütfen önce bir patch seçiniz.')),
+          reviewingLabel: @json(__('İnceleniyor...')),
+          selectedPatchReviewing: @json(__('Seçilen patch inceleniyor...')),
+          patchAnalysisErrorText: @json(__('Patch analizi sırasında bir hata oluştu.')),
+          patchReviewErrorTitle: @json(__('Patch İnceleme Hatası')),
+          processErrorText: @json(__('İşlem sırasında bir hata oluştu.')),
+          modelNotSelectedTitle: @json(__('Model Seçilmedi')),
+          modelNotSelectedText: @json(__('Lütfen bir model seçiniz.')),
+          imageMissingTitle: @json(__('Görsel Eksik')),
+          imageMissingText: @json(__('Lütfen bir görsel yükleyiniz.')),
+          reviewCompletedTitle: @json(__('İnceleme Tamamlandı')),
+          ok: @json(__('Tamam')),
+          reviewInProgressTitle: @json(__('İnceleme Yapılıyor')),
+          imageResizedAndSelectedTitle: @json(__('Görsel Küçültüldü ve Seçildi')),
+          imageSelectedTitle: @json(__('Görsel Seçildi')),
+          selectedImageLabel: @json(__('Seçilen Görsel:')),
+          autoResizedLabel: @json(__('otomatik küçültüldü')),
+          imageErrorTitle: @json(__('Görsel Hatası'))
+      };
+
+      async function blobUrlToFile(blobUrl, filename = "patch.jpg", fallbackType = "image/jpeg") {
+          const response = await fetch(blobUrl);
+          const blob = await response.blob();
+          const type = blob.type || fallbackType;
+          return new File([blob], filename, { type });
+      }
+
+      function setModalLoading(state){
+          $("#modalPatchLoader").toggleClass("d-none", !state);
+      }
+
+      function bindModalImageToggle(){
+          const img = $("#modalPatchImg");
+          img.off("mousedown touchstart mouseup touchend mouseleave");
+          if (!(modalOriginalImage && modalXaiImage)) return;
+          img.on("mousedown touchstart", function () {
+              img.attr("src", modalOriginalImage);
+          });
+          img.on("mouseup touchend mouseleave", function () {
+              img.attr("src", modalXaiImage);
+          });
+      }
+
+      function fillModalResult(res){
+          if (res.probabilities) {
+              let aca = res.probabilities.ACA || 0;
+              let scc = res.probabilities.SCC || 0;
+              let normal = res.probabilities.NORMAL || 0;
+              let positive = aca + scc;
+              let negative = normal;
+              $("#modalPozitif").text(`${positive.toFixed(2)}${translations.positiveSuffix}`);
+              $("#modalPozitifSub").text(`${translations.acaLabel}: ${aca.toFixed(2)}% - ${translations.sccLabel}: ${scc.toFixed(2)}%`);
+              $("#modalNegatif").text(`${negative.toFixed(2)}${translations.negativeSuffix}`);
+              $("#modalNegatifSub").text(`${translations.normalTissueLabel}: ${normal.toFixed(2)}%`);
+          } else {
+              if (res.positive !== undefined) {
+                  $("#modalPozitif").text(`${res.positive}${translations.positiveSuffix}`);
+                  $("#modalPozitifSub").text(translations.containsCancerTissue);
+              }
+              if (res.negative !== undefined) {
+                  $("#modalNegatif").text(`${res.negative}${translations.negativeSuffix}`);
+                  $("#modalNegatifSub").text(translations.doesNotContainCancerTissue);
+              }
+          }
+          modalOriginalImage = res.image_url || modalOriginalImage;
+          modalXaiImage = res.xai_image_url || null;
+
+          if (modalXaiImage) {
+              $("#modalPatchImg").attr("src", modalXaiImage);
+          } else if (modalOriginalImage) {
+              $("#modalPatchImg").attr("src", modalOriginalImage);
+          }
+          bindModalImageToggle();
+          $("#modalResultSection").removeClass("d-none");
+          $("#modalPredictBtn").addClass("d-none");
+          $("#modalInfoText").html(modalXaiImage
+              ? translations.patchReviewedHoldOriginal
+              : translations.patchReviewedResultShown);
+      }
 
       // Görsel yükle butonu → gizli inputu tetikle
       // $("#uploadBtn").on("click", function () {
@@ -529,15 +715,15 @@
 
       function resizeJpegIfNeeded(file) {
           return new Promise((resolve, reject) => {
-              if (!file) return reject("Dosya yok");
-              if (file.type !== "image/jpeg") return reject("Sadece JPG (image/jpeg) kabul ediliyor.");
+              if (!file) return reject(translations.noFile);
+              if (file.type !== "image/jpeg") return reject(translations.jpgOnly);
 
               const reader = new FileReader();
-              reader.onerror = () => reject("Dosya okunamadı.");
+              reader.onerror = () => reject(translations.fileReadError);
 
               reader.onload = (e) => {
                   const img = new Image();
-                  img.onerror = () => reject("Görsel yüklenemedi.");
+                  img.onerror = () => reject(translations.imageLoadError);
 
                   img.onload = () => {
                       const srcW = img.naturalWidth;
@@ -558,7 +744,7 @@
                       ctx.drawImage(img, 0, 0, dstW, dstH);
 
                       canvas.toBlob((blob) => {
-                          if (!blob) return reject("Küçültme sırasında hata oluştu.");
+                          if (!blob) return reject(translations.resizeError);
 
                           // Blob'u File'a çevirip selectedImage olarak saklayacağız (adı aynı kalsın diye)
                           const resizedFile = new File([blob], file.name, { type: "image/jpeg" });
@@ -590,14 +776,14 @@
 
               Swal.fire({
                   icon: "success",
-                  title: result.resized ? "Görsel Küçültüldü ve Seçildi" : "Görsel Seçildi",
+                  title: result.resized ? translations.imageResizedAndSelectedTitle : translations.imageSelectedTitle,
                   text: selectedImage.name + (result.resized ? ` (${result.width}×${result.height})` : ""),
                   timer: 1200,
                   showConfirmButton: false
               });
 
               imgMsg.removeClass("d-none")
-                    .html(`Seçilen Görsel: <strong>${selectedImage.name}</strong>${result.resized ? ` <span class="text-muted">(otomatik küçültüldü: ${result.width}×${result.height})</span>` : ""}`);
+                    .html(`${translations.selectedImageLabel} <strong>${selectedImage.name}</strong>${result.resized ? ` <span class="text-muted">(${translations.autoResizedLabel}: ${result.width}×${result.height})</span>` : ""}`);
               $('#patchSizeSection').removeClass('d-none');
 
           } catch (err) {
@@ -608,7 +794,7 @@
 
               Swal.fire({
                   icon: "error",
-                  title: "Görsel Hatası",
+                  title: translations.imageErrorTitle,
                   text: String(err),
               });
           } finally {
@@ -631,14 +817,14 @@
           const url = URL.createObjectURL(blob);
           const img = new Image();
           img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-          img.onerror = () => { URL.revokeObjectURL(url); reject("Görsel okunamadı."); };
+          img.onerror = () => { URL.revokeObjectURL(url); reject(translations.imageBlobReadError); };
           img.src = url;
         });
       }
 
       function canvasToBlob(canvas, type="image/jpeg", quality=0.85){
         return new Promise((resolve, reject) => {
-          canvas.toBlob((blob) => blob ? resolve(blob) : reject("Blob üretilemedi."), type, quality);
+          canvas.toBlob((blob) => blob ? resolve(blob) : reject(translations.blobCreateError), type, quality);
         });
       }
 
@@ -742,7 +928,7 @@
         const totalCells = gridN * gridN;
 
         $("#patchPreviewSection").removeClass("d-none");
-        $("#patchInfo").text(`${W}×${H} | Grid: ${gridN}×${gridN} = ${totalCells} | Hücre: ~${cellW}×${cellH}px`);
+        $("#patchInfo").text(`${W}×${H} | ${translations.gridLabel}: ${gridN}×${gridN} = ${totalCells} | ${translations.cellLabel}: ~${cellW}×${cellH}px`);
 
         // parça üretim canvas'ı (gerçek parça)
         const patchCanvas = document.createElement("canvas");
@@ -799,7 +985,7 @@
 
             $("#patchGrid").append(`
               <div class="col-3 col-sm-2 col-md-1">
-                <div class="border p-1">
+                <div class="border p-1 patch-card" data-patch-index="${shown + 1}" data-grid="${gridN}" style="cursor:pointer;">
                   <img src="${url}" class="w-100" alt="cell ${r}-${c}">
                 </div>
               </div>
@@ -813,14 +999,14 @@
           $("#patchGrid").prepend(`
             <div class="col-12">
               <div class="alert alert-warning py-2 mb-2">
-                Önizleme için <b>${previewLimit}</b> adet gösterildi.
-                (Beyaz ignore hariç) Toplam grid: <b>${totalCells}</b>
+                ${translations.previewShownLimited} <b>${previewLimit}</b> ${translations.shownCount}
+                ${translations.whiteIgnoredTotalGrid} <b>${totalCells}</b>
               </div>
             </div>
           `);
         }
 
-        $("#patchInfo").append(` | Gösterilen: ${shown} | Ignore (beyaz): ${ignored}`);
+        $("#patchInfo").append(` | ${translations.shownLabel}: ${shown} | ${translations.ignoredWhiteLabel}: ${ignored}`);
 
         setLoading(false);
         return { gridN, totalCells, shown, ignored, cellW, cellH, W, H };
@@ -830,7 +1016,7 @@
       $(document).on("click", ".grid-btn", async function(){
         try{
           if(!selectedImage){
-            Swal.fire({ icon:"warning", title:"Önce görsel seçin", timer: 1200, showConfirmButton:false });
+            Swal.fire({ icon:"warning", title: translations.selectImageFirstTitle, timer: 1200, showConfirmButton:false });
             return;
           }
 
@@ -845,11 +1031,11 @@
             sampleSize: 24              // 16 -> 24 (karar daha sağlam)
           });
 
-          Swal.fire({ icon:"success", title:`${gridN}×${gridN} bölme hazır`, timer: 900, showConfirmButton:false });
+          Swal.fire({ icon:"success", title:`${gridN}×${gridN} ${translations.splitReadySuffix}`, timer: 900, showConfirmButton:false });
 
         }catch(err){
           setLoading(false);
-          Swal.fire({ icon:"error", title:"Bölme Hatası", text: String(err) });
+          Swal.fire({ icon:"error", title: translations.splitErrorTitle, text: String(err) });
         }
       });
 
@@ -871,22 +1057,99 @@
       //     }
       // });
 
+      $(document).on("click", ".patch-card", async function () {
+          try {
+              const patchImgSrc = $(this).find("img").attr("src");
+              const patchIndex = $(this).data("patch-index") || "";
+              const gridN = $(this).data("grid") || "";
+              const patchKey = `${gridN}_${patchIndex}`;
+
+              selectedPatchKey = patchKey;
+              modalOriginalImage = patchImgSrc;
+              modalXaiImage = null;
+              $("#modalPatchImg").attr("src", patchImgSrc);
+              bindModalImageToggle();
+              $("#modalPatchMeta").html(`${translations.patchMetaPrefix}${patchIndex} • ${translations.gridLabel}: ${gridN}×${gridN}`);
+              $("#modalResultSection").addClass("d-none");
+
+              if (patchResultCache[patchKey]) {
+                  fillModalResult(patchResultCache[patchKey]);
+              } else {
+                  $("#modalPredictBtn").removeClass("d-none").prop("disabled", false);
+                  $("#modalInfoText").html(`${translations.patchSelectForInference} <strong>${translations.reviewButtonLabel}</strong> ${translations.pressButtonSuffix}`);
+              }
+
+              selectedPatchFile = await blobUrlToFile(patchImgSrc, `patch_${patchIndex || "selected"}.jpg`);
+              if (patchModal) patchModal.show();
+          } catch (err) {
+              console.error("Patch açma hatası:", err);
+              Swal.fire({
+                  icon: "error",
+                  title: translations.patchOpenErrorTitle,
+                  text: translations.patchOpenErrorText
+              });
+          }
+      });
+
+      $("#modalPredictBtn").on("click", function () {
+          const model = $("input[name='aiModel']:checked").val();
+          if (!selectedPatchFile) {
+              Swal.fire({ icon: "warning", title: translations.patchMissingTitle, text: translations.patchMissingText });
+              return;
+          }
+
+          let url;
+          if(model == 'breast') url = "{{ route('predictBreast') }}";
+          else if(model == 'lung') url = "{{ route('predictLung') }}";
+          else if(model == 'colon') url = "{{ route('predictColon') }}";
+          else if(model == 'hcd') url = "{{ route('predictHCD') }}";
+
+          let formData = new FormData();
+          formData.append("_token", $("input[name='_token']").val());
+          formData.append("image", selectedPatchFile);
+          formData.append("aiModel", model);
+
+          $.ajax({
+              url: url,
+              method: "POST",
+              data: formData,
+              contentType: false,
+              processData: false,
+              beforeSend: function () {
+                  $("#modalPredictBtn").prop("disabled", true).html(`<i class="icon-base ti tabler-loader-2 me-1"></i>${translations.reviewingLabel}`);
+                  $("#modalInfoText").html(translations.selectedPatchReviewing);
+                  setModalLoading(true);
+              },
+              success: function (res) {
+                  setModalLoading(false);
+                  patchResultCache[selectedPatchKey] = res;
+                  fillModalResult(res);
+              },
+              error: function () {
+                  setModalLoading(false);
+                  $("#modalPredictBtn").prop("disabled", false).html(`<i class="icon-base ti tabler-microscope me-1"></i>${translations.reviewButtonLabel}`);
+                  $("#modalInfoText").html(translations.patchAnalysisErrorText);
+                  Swal.fire({ icon: "error", title: translations.patchReviewErrorTitle, text: translations.processErrorText });
+              }
+          });
+      });
+
       // İncele butonu
       $("#predictBtn").on("click", function () {
           const model = $("#aiModel").val();
           if (model === "0") {
               Swal.fire({
                   icon: "warning",
-                  title: "Model Seçilmedi",
-                  text: "Lütfen bir model seçiniz."
+                  title: translations.modelNotSelectedTitle,
+                  text: translations.modelNotSelectedText
               });
               return;
           }
           if (!selectedImage) {
               Swal.fire({
                   icon: "warning",
-                  title: "Görsel Eksik",
-                  text: "Lütfen bir görsel yükleyiniz."
+                  title: translations.imageMissingTitle,
+                  text: translations.imageMissingText
               });
               return;
           }
@@ -926,8 +1189,8 @@
                 stopSwalTimer(); // Swal kapat + timer durdur
                   Swal.fire({
                     icon: "success",
-                    title: "İnceleme Tamamlandı",
-                    confirmButtonText: "Tamam"
+                    title: translations.reviewCompletedTitle,
+                    confirmButtonText: translations.ok
                   });
                   console.log(res);
                   // Görsel göster
@@ -948,24 +1211,24 @@
                       let negative = normal;    // NORMAL
 
                       // Card 1 — Pozitif
-                      $("#pozitif").text(positive.toFixed(2) + "% Pozitif");
-                      $("#pozitifSub").text(`ACA: ${aca.toFixed(2)}% — SCC: ${scc.toFixed(2)}%`);
+                      $("#pozitif").text(`${positive.toFixed(2)}${translations.positiveSuffix}`);
+                      $("#pozitifSub").text(`${translations.acaLabel}: ${aca.toFixed(2)}% - ${translations.sccLabel}: ${scc.toFixed(2)}%`);
 
                       // Card 2 — Negatif
-                      $("#negatif").text(negative.toFixed(2) + "% Negatif");
-                      $("#negatifSub").text(`Normal Doku: ${normal.toFixed(2)}%`);
+                      $("#negatif").text(`${negative.toFixed(2)}${translations.negativeSuffix}`);
+                      $("#negatifSub").text(`${translations.normalTissueLabel}: ${normal.toFixed(2)}%`);
                   }
                   else{
                     // Pozitif (%)
                     if (res.positive !== undefined) {
-                        $("#pozitif").text(res.positive + "% Pozitif");
-                        $("#pozitifSub").text(`(Kanser Dokusu İçerir)`);
+                        $("#pozitif").text(`${res.positive}${translations.positiveSuffix}`);
+                        $("#pozitifSub").text(translations.containsCancerTissue);
 
                     }
                     // Negatif (%)
                     if (res.negative !== undefined) {
-                        $("#negatif").text(res.negative + "% Negatif");
-                        $("#negatifSub").text(`(Kanser Dokusu İçermez)`);
+                        $("#negatif").text(`${res.negative}${translations.negativeSuffix}`);
+                        $("#negatifSub").text(translations.doesNotContainCancerTissue);
 
                     }
                   }
@@ -987,62 +1250,61 @@
 
   });
 
-let timerInterval;
-let startTime;
+  let timerInterval;
+  let startTime;
 
-function startSwalTimer() {
+  function startSwalTimer() {
 
-    Swal.fire({
-        title: "🧬 İnceleme Yapılıyor",
-        html: `
-            <div>
+      Swal.fire({
+          title: translations.reviewInProgressTitle,
+          html: `
               <div>
-                <span id="swal-timer" style="font-size:23px; font-weight:600; font-family: 'Courier New', monospace; display: inline-block; width: 100%; text-align: center;">00:00.000</span>
-              </div>
-              {{-- Spinner Loader --}}
-              <div class="d-flex mt-5 mb-3" id="loadingSpinner" style="justify-content: center; align-items: center;">
-                <div class="sk-grid" style="width: 3.7em; height: 3.7em">
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
-                  <div class="sk-grid-cube"></div>
+                <div>
+                  <span id="swal-timer" style="font-size:23px; font-weight:600; font-family: 'Courier New', monospace; display: inline-block; width: 100%; text-align: center;">00:00.000</span>
                 </div>
+                {{-- Spinner Loader --}}
+                <div class="d-flex mt-5 mb-3" id="loadingSpinner" style="justify-content: center; align-items: center;">
+                  <div class="sk-grid" style="width: 3.7em; height: 3.7em">
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                    <div class="sk-grid-cube"></div>
+                  </div>
+                </div>
+                {{-- Spinner Loader End --}}
+                  
               </div>
-              {{-- Spinner Loader End --}}
-                
-            </div>
-        `,
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        didOpen: () => {
-            startTime = Date.now();
-            timerInterval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
+          `,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          didOpen: () => {
+              startTime = Date.now();
+              timerInterval = setInterval(() => {
+                  const elapsed = Date.now() - startTime;
 
-                const minutes = String(Math.floor(elapsed / 60000)).padStart(2, '0');
-                const seconds = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
-                const ms = String(elapsed % 1000).padStart(3, '0');
+                  const minutes = String(Math.floor(elapsed / 60000)).padStart(2, '0');
+                  const seconds = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
+                  const ms = String(elapsed % 1000).padStart(3, '0');
 
-                document.getElementById("swal-timer").textContent = `${minutes}:${seconds}.${ms}`;
-            }, 30);
+                  document.getElementById("swal-timer").textContent = `${minutes}:${seconds}.${ms}`;
+              }, 30);
 
-        }
-    });
-}
+          }
+      });
+  }
 
-function stopSwalTimer() {
-    clearInterval(timerInterval);
-    Swal.close();
-}
+  function stopSwalTimer() {
+      clearInterval(timerInterval);
+      Swal.close();
+  }
 </script>
 
 
 
 </html>
-

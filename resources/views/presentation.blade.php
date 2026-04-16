@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>{{ __('Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti') }}</title>
+    <title>{{ __('Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti | Final Sunumu') }}</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -74,7 +74,7 @@
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/predict-wsi">{{ __('WSI İncele') }}</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link fw-medium" href="/project-presentation">{{ __('Proje Sunumu') }}</a>
               </li>
               <li class="nav-item">
@@ -83,7 +83,7 @@
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/#landingTeam">{{ __('Takım') }}</a>
               </li>
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link fw-medium" href="/api-docs">{{ __('API') }}</a>
               </li>
               <li class="nav-item d-lg-none">
@@ -150,207 +150,24 @@
     <!-- Sections:Start -->
     <div data-bs-spy="scroll" class="scrollspy-example">
       <!-- Prediction Form: Start -->
-      <section id="landing-predict-app" class="section-py first-section-pt">
-        <div class="container mt-6">
-          <div class="row g-6">
-            <div class="col-lg-8">
-              {{-- File --}}
-              <div id="upload-file" class="card mb-4 shadow-sm anchor-target">
-                <div class="card-header">
-                    <h3 class="card-title mb-0 anchor-target">{{ __('Predict — File Upload') }}</h3>
-                </div>
-                <div class="card-body">
-                  <p class="text-muted mb-2">
-                      {{ __('Göğüs / Akciğer / Kolon / HCD modelleri için gönderilen resim dosyasına dair yüzdesel çıkarım sonucu döndürür.') }}
-                  </p>
-                  <div class="border rounded p-3 bg-light">
-                    <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
-                      <span class="badge badge-danger">POST</span> /api/predict
-                    </code>
-                  </div>
-                  <h6 class="mt-3 fw-bold">{{ __('Body (multipart/form-data):') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "model": "breast", // "hcd" , "lung" , "colon"
-    "image": (binary file)
-  }
-                  </pre>
-                  <h6 class="fw-bold mt-3">{{ __('Örnek Response:') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "success": true,
-    "image_url": "/img/preds/breast/api_....jpg",
-    "model": "breast",
-    "prediction": {
-      "positive": 82.5,
-      "negative": 17.4,
-      "xai_image_url": "/img/preds/xai/colon_gradcam_20251224_095855_706092.png"
-    }
-  }
-                  </pre>
-                </div>
-              </div>
-              {{-- Base64 --}}
-              <div id="upload-base64" class="card mb-4 shadow-sm anchor-target">
-                <div class="card-header">
-                    <h3 class="card-title mb-0">{{ __('Predict — Base64') }}</h3>
-                </div>
-                <div class="card-body">
-                  <p class="text-muted">
-                      {{ __('Base64 ile encode edilmiş görsel dosyalarına dair yüzdesel çıkarım sonucu döner.') }}
-                  </p>
-                  
-                  <div class="border rounded p-3 bg-light">
-                    <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
-                      <span class="badge badge-danger">POST</span> /api/predict-base64
-                    </code>
-                  </div>
-                  <h6 class="mt-3 fw-bold">{{ __('Body (JSON):') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "model": "lung", // "breast", "hcd", "colon"
-    "image_base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..."
-  }
-                  </pre>
-                  <h6 class="fw-bold mt-3">{{ __('Response:') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "success": true,
-    "image_url": "/img/preds/lung/api_24-12-2025_09-56-36_656113279.jpg",
-    "model": "lung",
-    "prediction": {
-        "confidence": 100,
-        "prediction": "ACA",
-        "probabilities": {
-            "ACA": 100,
-            "NORMAL": 0,
-            "SCC": 0
-        },
-        "xai_image_url": "/img/preds/xai/lung_gradcam_20251224_095644_711906.png"
-    }
-  }
-                  </pre>
-                </div>
-              </div>
-              {{-- Login --}}
-              <div id="login" class="card mb-4 shadow-sm  anchor-target">
-                <div class="card-header">
-                    <h3 class="card-title mb-0">{{ __('Login (Get Bearer Token)') }}</h3>
-                </div>
-                <div class="card-body">
-                  <p class="text-muted">
-                      {{ __('E-posta adresiniz ve parolanız ile API isteklerinde kullanabileceğiniz yetkilendirme tokenı döner.') }}
-                  </p>
-                  
-                  <div class="border rounded p-3 bg-light">
-                    <code class="text-dark" style="font-size: 1.3em; font-weight: 700">
-                      <span class="badge badge-danger">POST</span> /api/login
-                    </code>
-                  </div>
-                  <h6 class="mt-3 fw-bold">{{ __('Body (JSON):') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "email": "user@test.com",
-    "password": "abcd1234"
-  }
-                  </pre>
-                  <h6 class="fw-bold mt-3">{{ __('Response:') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "success": true,
-    "token": "3|kRXMd9Up........."
-  }
-                  </pre>
-                </div>
-              </div>
-              {{-- Model Parametreleri --}}
-              <div id="models" class="card mb-4 shadow-sm anchor-target">
-                  <div class="card-header">
-                      <h3 class="card-title mb-0">{{ __('Desteklenen Model Parametreleri (model)') }}</h3>
-                  </div>
-                  <div class="card-body">
-                      <ul class="list-group">
-                          <li class="list-group-item"><strong>breast</strong> — {{ __('BreakHis + BACH + IDC Birleşik Göğüs Kanseri Modeli') }}</li>
-                          <li class="list-group-item"><strong>hcd</strong> — {{ __('Göğüs Kanseri Lenf Nodu Metastazı') }}</li>
-                          <li class="list-group-item"><strong>lung</strong> — {{ __('Akciğer Kanseri Modeli') }}</li>
-                          <li class="list-group-item"><strong>colon</strong> — {{ __('Kolon Kanseri Modeli') }}</li>
-                      </ul>
-                  </div>
-              </div>
-              {{-- Response lar --}}
-              <div id="errors" class="card mb-5 shadow-sm anchor-target">
-                <div class="card-header">
-                    <h3 class="card-title mb-0">{{ __('Hata Açıklamaları') }}</h3>
-                </div>
-                <div class="card-body">
-                  <h6 class="fw-bold">{{ __('Authantication Hatası') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "success": false,
-    "errors": {
-      "authantication": ["Bearer Token is Required"]
-    }
-  }
-                  </pre>
-                  <h6 class="fw-bold">{{ __('Parametre Hatası (model) (422)') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "success": false,
-    "errors": {
-        "image": [
-            "image alanı gereklidir."
-        ]
-    }
-  }
-                  </pre>
-                  <h6 class="fw-bold mt-3">{{ __('Model Error (500)') }}</h6>
-                  <pre class="bg-dark text-white p-3 rounded">
-  {
-    "success": false,
-    "message": "Unknown model type"
-  }
-                  </pre>
-                </div>
-              </div>
+      <section id="landing-predict-app" class="section-py bg-body landing-reviews">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              
+		  <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https://www.canva.com/design/DAHGG8CHyMk/eRInoLGkmQmoeoPaFWVlqA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAHGG8CHyMk&#x2F;eRInoLGkmQmoeoPaFWVlqA&#x2F;view?utm_content=DAHGG8CHyMk&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">{{ __('Final Sunum') }}</a> - {{ __('SG AI TEAM') }}
+               
+              
             </div>
-            {{-- Menü  --}}
-            <div class="col-lg-4 api-sidebar">
-              <div class="bg-lighter py-2 px-4 rounded">
-                <h5 class="mb-0">{{ __('EndPoint Listesi') }}</h5>
-              </div>
-              <ul class="list-unstyled mt-4 mb-0">
-                <li class="mb-4">
-                  <a href="#upload-file" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">{{ __('Görsel Dosyası ile Tahmin') }}</span>
-                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
-                  </a>
-                </li>
-                <li class="mb-4">
-                  <a href="#upload-base64" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">{{ __('Base64 ile Tahmin') }}</span>
-                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
-                  </a>
-                </li>
-                <li class="mb-4">
-                  <a href="#login" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">{{ __('Authantication') }}</span>
-                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
-                  </a>
-                </li>
-                <li class="mb-4">
-                  <a href="#models" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">{{ __('Desteklenen Parametreler') }}</span>
-                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
-                  </a>
-                </li>
-                <li class="mb-4">
-                  <a href="#errors" class="text-heading d-flex justify-content-between nav-link">
-                    <span class="text-truncate me-2">{{ __('Hata Açıklamaları') }}</span>
-                    <i class="icon-base ti tabler-chevron-right scaleX-n1-rtl text-body-secondary"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+          </div>
+        </div>
       </section>
       <!-- Prediction Form: End -->
     </div>
@@ -426,22 +243,6 @@
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <style>
-    .anchor-target {
-      scroll-margin-top: 90px; /* navbar yüksekliğine göre */
-    }
-    .api-sidebar {
-      position: sticky;
-      top: 50px;
-      max-height: calc(100vh - 100px);
-      overflow-y: auto;
-    }
-    .nav-link.active {
-      font-weight: 600;
-      color: var(--bs-primary) !important;
-    }
-    
-  </style>
 
 
 
