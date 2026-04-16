@@ -70,6 +70,9 @@
               <li class="nav-item">
                 <a class="nav-link fw-medium" href="/predict">YZ Teşhis Asistanı</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link fw-medium" href="/predict-wsi">WSI İncele</a>
+              </li>
               {{-- <li class="nav-item">
                 <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
               </li> --}}
