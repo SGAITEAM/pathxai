@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti</title>
+    <title>{{ __('Path-XAI - Histopatoloji Görüntülerinden Yapay Zeka İle Kanser Tespiti') }}</title>
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
@@ -44,7 +44,7 @@
           <!-- Menu logo wrapper: Start -->
           <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8 ms-0">
             <!-- Mobile menu toggle: Start-->
-            <button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
               <i class="icon-base ti tabler-menu-2 icon-lg align-middle text-heading fw-medium"></i>
             </button>
             <!-- Mobile menu toggle: End-->
@@ -54,13 +54,13 @@
                   <img src="img/logo.png" alt="" width="64" height="64" />
                 </span>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">PathXAI</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ __('PathXAI') }}</span>
             </a>
           </div>
           <!-- Menu logo wrapper: End -->
           <!-- Menu wrapper: Start -->
           <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
-            <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
               <i class="icon-base ti tabler-x icon-lg"></i>
             </button>
             <ul class="navbar-nav me-auto">
@@ -68,87 +68,76 @@
                 <a class="nav-link fw-medium" aria-current="page" href="landing-page.html#landingHero">Ana Sayfa</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/predict">YZ Teşhis Asistanı</a>
+                <a class="nav-link fw-medium" href="/predict">{{ __('YZ Teşhis Asistanı') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/predict-wsi">WSI İncele</a>
+                <a class="nav-link fw-medium" href="/predict-wsi">{{ __('WSI İncele') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/project-presentation">Proje Sunumu</a>
+                <a class="nav-link fw-medium" href="/project-presentation">{{ __('Proje Sunumu') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/abstract">Özet</a>
+                <a class="nav-link fw-medium" href="/abstract">{{ __('Özet') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/#landingTeam">Takım</a>
+                <a class="nav-link fw-medium" href="/#landingTeam">{{ __('Takım') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fw-medium" href="/api-docs">API</a>
+                <a class="nav-link fw-medium" href="/api-docs">{{ __('API') }}</a>
               </li>
-              
-              {{-- <li class="nav-item">
-                <a class="nav-link fw-medium" href="landing-page.html#landingContact">İletişim</a>
-              </li> --}}
-
+              <li class="nav-item d-lg-none">
+                <a class="nav-link fw-medium" href="{{ route('dashboard') }}">{{ __('Giriş/Kayıt') }}</a>
+              </li>
             </ul>
           </div>
           <div class="landing-menu-overlay d-lg-none"></div>
           <!-- Menu wrapper: End -->
           <!-- Toolbar: Start -->
           <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <!-- Style Switcher -->
-            <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
+            <!-- Language Switcher -->
+            <li class="nav-item dropdown me-2 me-xl-1">
               <a
                 class="nav-link dropdown-toggle hide-arrow"
-                id="nav-theme"
+                id="nav-language"
                 href="javascript:void(0);"
                 data-bs-toggle="dropdown">
-                <i class="icon-base ti tabler-sun icon-lg theme-icon-active"></i>
-                <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
+                <i class="icon-base ti tabler-language icon-lg"></i>
+                <span class="d-none ms-2" id="nav-language-text">{{ __('Dil') }}</span>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-language-text">
                 <li>
-                  <button
-                    type="button"
-                    class="dropdown-item align-items-center active"
-                    data-bs-theme-value="light"
-                    aria-pressed="false">
-                    <span><i class="icon-base ti tabler-sun icon-md me-3" data-icon="sun"></i>Light</span>
-                  </button>
+                  <a href="/lang/tr" class="dropdown-item align-items-center {{ app()->getLocale() === 'tr' ? 'active' : '' }}">
+                    <span>
+                      @if (app()->getLocale() === 'tr')
+                        <i class="icon-base ti tabler-check icon-md me-3"></i>
+                      @else
+                        <span class="d-inline-block me-3" style="width: 1.25rem;"></span>
+                      @endif
+                      {{ __('Türkçe') }}
+                    </span>
+                  </a>
                 </li>
                 <li>
-                  <button
-                    type="button"
-                    class="dropdown-item align-items-center"
-                    data-bs-theme-value="dark"
-                    aria-pressed="true">
-                    <span><i class="icon-base ti tabler-moon-stars icon-md me-3" data-icon="moon-stars"></i>Dark</span>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    class="dropdown-item align-items-center"
-                    data-bs-theme-value="system"
-                    aria-pressed="false">
-                    <span
-                      ><i
-                        class="icon-base ti tabler-device-desktop-analytics icon-md me-3"
-                        data-icon="device-desktop-analytics"></i
-                      >System</span
-                    >
-                  </button>
+                  <a href="/lang/en" class="dropdown-item align-items-center {{ app()->getLocale() === 'en' ? 'active' : '' }}">
+                    <span>
+                      @if (app()->getLocale() === 'en')
+                        <i class="icon-base ti tabler-check icon-md me-3"></i>
+                      @else
+                        <span class="d-inline-block me-3" style="width: 1.25rem;"></span>
+                      @endif
+                      {{ __('English') }}
+                    </span>
+                  </a>
                 </li>
               </ul>
             </li>
-            <!-- / Style Switcher-->
-
+            <!-- / Language Switcher-->
             <!-- navbar button: Start -->
-            <li>
-              <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self"
-                ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
-                ><span class="d-none d-md-block">Giriş/Kayıt</span></a
-              >
+            <li class="d-none d-md-block">
+              <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_self">
+                <span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span>
+                <span class="d-none d-md-block">{{ __('Giriş/Kayıt') }}</span>
+              </a>
             </li>
             <!-- navbar button: End -->
           </ul>
@@ -162,30 +151,29 @@
       <!-- Hero: Start -->
       <section id="hero-animation">
         <div id="landingHero" class="section-py landing-hero position-relative overflow-hidden ">
-          <img src="../../assets/img/front-pages/backgrounds/hero-bg.png" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1" />
+          <img src="../../assets/img/front-pages/backgrounds/hero-bg.png" alt="{{ __('hero background') }}" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1" />
           <div class="container pt-12 pb-12">
             <div class="row align-items-center text-center text-lg-start">
               <div class="col-lg-7">
-                  <div class="hero-text-box text-center position-relative" style="max-inline-size: 90%;">
+                  <div class="hero-text-box text-center position-relative" style="max-inline-size: 50.375rem;">
                     <h1 class="text-primary hero-title display-6 fw-extrabold">
-                      Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                      {{ __('Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi') }}
                     </h1>
                     <h2 class="hero-sub-title h6 mb-6">
-                      Bu proje, kanserli hücrelerin histopatolojik görüntüler üzerinden tespit ve sınıflandırılmasını sağlayarak, 
-                      klinik karar sürecini desteklemeyi amaçlamaktadır.
+                      {{ __('Bu proje, kanserli hücrelerin histopatolojik görüntüler üzerinden tespit ve sınıflandırılmasını sağlayarak, klinik karar sürecini desteklemeyi amaçlamaktadır.') }}
                       <br class="d-none d-lg-block mb-3" />
                       <span class="position-relative fw-extrabold z-1">
-                        TÜBİTAK 2204-A 
-                        <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
+                        {{ __('TÜBİTAK 2204-A') }}
+                        <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="{{ __('laptop charging') }}" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
                       </span>
-                        kapsamında 
-                        <br>Eskişehir Sabiha Gökçen M.T.A.L öğrencileri tarfından geliştirilmiştir.
+                        {{ __('kapsamında') }}
+                        <br>{{ __('Eskişehir Sabiha Gökçen M.T.A.L öğrencileri tarfından geliştirilmiştir.') }}
                       
                     </h2>
                     <div class="landing-hero-btn d-inline-block position-relative">
                       <a href="/predict" class="btn btn-primary btn-lg">
                         <span class="tf-icons icon-base ti tabler-microscope scaleX-n1-rtl me-md-3"></span>
-                        Teşhis Asistanı
+                        {{ __('Teşhis Asistanı') }}
                       </a>
                     </div>
                   </div>
@@ -206,12 +194,12 @@
       <section id="landingFeatures" class="section-py landing-features"  style="padding-block: 3.3em">
         <div class="container">
           <h2 class="text-center mb-3">
-            Projede Kullanılan  
+            {{ __('Projede Kullanılan') }}
             <span class="position-relative fw-extrabold z-1">
-              Teknikler
+              {{ __('Teknikler') }}
               <img
                 src="../../assets/img/front-pages/icons/section-title-icon.png"
-                alt="laptop charging"
+                alt="{{ __('laptop charging') }}"
                 class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />
             </span>
             <p class="text-center pb-6">
@@ -227,9 +215,9 @@
                 </svg>
                 
               </div>
-              <h5 class="mb-2">XAI</h5>
+              <h5 class="mb-2">{{ __('XAI') }}</h5>
               <p class="features-icon-description">
-                Yapay zekânın verdiği kararları görselleştirerek kara kutu olmasını engeller
+                {{ __('Yapay zekânın verdiği kararları görselleştirerek kara kutu olmasını engeller') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -237,9 +225,9 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-photo-ai"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 8h.01" /><path d="M10 21h-4a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v5" /><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l1 1" /><path d="M14 21v-4a2 2 0 1 1 4 0v4" /><path d="M14 19h4" /><path d="M21 15v6" /></svg>
                 
               </div>
-              <h5 class="mb-2">Grad-CAM</h5>
+              <h5 class="mb-2">{{ __('Grad-CAM') }}</h5>
               <p class="features-icon-description">
-                Modelin hangi dokulardan çıkarım yaptığını renkli ısı haritalarıyla gösterir
+                {{ __('Modelin hangi dokulardan çıkarım yaptığını renkli ısı haritalarıyla gösterir') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -267,33 +255,33 @@
                   </svg>
 
               </div>
-              <h5 class="mb-2">Patch & WSI</h5>
+              <h5 class="mb-2">{{ __('Patch & WSI') }}</h5>
               <p class="features-icon-description">
-                Doku örnekleri dijital olarak incelenir ve çıkarım yapılır
+                {{ __('Doku örnekleri dijital olarak incelenir ve çıkarım yapılır') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
               <div class="text-center mb-4 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chart-covariate"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 11h.009" /><path d="M14 15h.009" /><path d="M12 6h.009" /><path d="M8 10h.009" /><path d="M3 21l17 -17" /><path d="M3 3v18h18" /></svg>
               </div>
-              <h5 class="mb-2">ROC-AUC & Accuracy</h5>
+              <h5 class="mb-2">{{ __('ROC-AUC & Accuracy') }}</h5>
               <p class="features-icon-description">
-                Modelin doğruluk ve performansını gösteren metrikler
+                {{ __('Modelin doğruluk ve performansını gösteren metrikler') }}
               </p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
               <div class="text-center mb-4 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-stack-pop"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 9.5l-3 1.5l8 4l8 -4l-3 -1.5" /><path d="M4 15l8 4l8 -4" /><path d="M12 11v-7" /><path d="M9 7l3 -3l3 3" /></svg>
               </div>
-              <h5 class="mb-2">Transfer Öğrenme</h5>
-              <p class="features-icon-description">Ağırlık aktarımı ile daha önce eğitilmiş modellerden faydalanmayı sağlayan derin öğrenme tekniği</p>
+              <h5 class="mb-2">{{ __('Transfer Öğrenme') }}</h5>
+              <p class="features-icon-description">{{ __('Ağırlık aktarımı ile daha önce eğitilmiş modellerden faydalanmayı sağlayan derin öğrenme tekniği') }}</p>
             </div>
             <div class="col-lg-4 col-sm-6 text-center features-icon-box">
               <div class="text-center mb-4 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-stack-front"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-8 4l8 4l8 -4l-8 -4" fill="currentColor" /><path d="M8 14l-4 2l8 4l8 -4l-4 -2" /><path d="M8 10l-4 2l8 4l8 -4l-4 -2" /></svg>
               </div>
-              <h5 class="mb-2">Data Augmentation</h5>
-              <p class="features-icon-description">Modelin daha dayanıklı olması için görüntüleri döndürme, kırpma gibi işlemlerle çeşitlendirme tekniğidir</p>
+              <h5 class="mb-2">{{ __('Data Augmentation') }}</h5>
+              <p class="features-icon-description">{{ __('Modelin daha dayanıklı olması için görüntüleri döndürme, kırpma gibi işlemlerle çeşitlendirme tekniğidir') }}</p>
             </div>
           </div>
         </div>
@@ -304,8 +292,8 @@
       <section id="landingFacts" class="section-py landing-fun-facts" style="padding-block: 3.3em; background-color: #f8f7fa; ">
         <div class="container">
           <h2 class="text-center mb-6">
-            <span class="position-relative fw-extrabold z-1">Projenin Katkıları
-              <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
+            <span class="position-relative fw-extrabold z-1">{{ __('Projenin Katkıları') }}
+              <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="{{ __('laptop charging') }}" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
           </h2>
           <p class="text-center pb-3">
@@ -327,10 +315,10 @@
                       <path d="M36.4961 19.1262C36.4961 18.5853 36.0705 18.1468 35.5454 18.1468C35.0203 18.1468 34.5946 18.5853 34.5946 19.1262C34.5946 19.6671 35.0203 20.1056 35.5454 20.1056C36.0705 20.1056 36.4961 19.6671 36.4961 19.1262Z" fill="currentColor"/>
                     </svg>
                   </div>
-                  <h3 class="mb-0">530 K+</h3>
+                  <h3 class="mb-0">{{ __('530 K+') }}</h3>
                   <p class="fw-medium mb-0">
-                    ’den fazla histopatolojik görüntü<br />
-                    ile eğitilmiş modeller
+                    {{ __('’den fazla histopatolojik görüntü') }}<br />
+                    {{ __('ile eğitilmiş modeller') }}
                   </p>
                 </div>
               </div>
@@ -348,10 +336,10 @@
                     </svg>
 
                   </div>
-                  <h3 class="mb-0">4 </h3>
+                  <h3 class="mb-0">{{ __('4') }}</h3>
                   <p class="fw-medium mb-0">
-                    Farklı Kanser Türü<br />
-                    ve 1 Metastaz Kanser Türü
+                    {{ __('Farklı Kanser Türü') }}<br />
+                    {{ __('ve 1 Metastaz Kanser Türü') }}
                   </p>
                 </div>
               </div>
@@ -362,10 +350,10 @@
                   <div class="mb-4 text-info">
                     <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-viewfinder"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 3l0 4" /><path d="M12 21l0 -3" /><path d="M3 12l4 0" /><path d="M21 12l-3 0" /><path d="M12 12l0 .01" /></svg>
                   </div>
-                  <h3 class="mb-0">%87-100</h3>
+                  <h3 class="mb-0">{{ __('%87-100') }}</h3>
                   <p class="fw-medium mb-0">
-                    Çıkarım Doğrulu<br />
-                    (Accuracy)
+                    {{ __('Çıkarım Doğrulu') }}<br />
+                    {{ __('(Accuracy)') }}
                   </p>
                 </div>
               </div>
@@ -380,10 +368,10 @@
                     <path d="M16.9288 14.4534L19.0936 11.6082C19.8977 10.6185 21.0729 10 22.3099 10H25.8974C26.5159 10 27.1344 10.1237 27.6911 10.433C28.2477 10.6804 28.7426 11.1133 29.1137 11.6082L31.3404 14.5152C33.0722 16.8037 33.0722 19.9582 31.3404 22.1849L28.99 25.1538L24.9696 19.9582L27.4437 17.8037C27.4437 17.8037 27.3818 17.8037 27.3818 17.7419C26.9488 17.4945 26.454 17.3708 25.9592 17.3708H22.3099C21.8151 17.3708 21.3203 17.5563 20.8873 17.8037L23.3614 19.9582L29.1755 27.3805L34 33.5657L28.99 37.4624L16.9288 22.123C15.1969 19.8964 15.1969 16.7419 16.9288 14.4534ZM19.9595 15.6286C20.0214 15.6904 20.0214 15.7523 20.0833 15.8141C20.207 15.6904 20.3925 15.6286 20.5781 15.5667C21.1347 15.3193 21.7533 15.1337 22.3718 15.1337H25.9592C26.5777 15.1337 27.1963 15.2574 27.7529 15.5667C27.8766 15.6286 28.0622 15.7523 28.1859 15.8141C28.6189 15.1956 28.8663 15.3297 28.6807 14.5874C28.6189 14.1545 28.4333 13.7215 28.124 13.3504C27.8766 13.0411 27.5055 12.7319 27.1344 12.5463C26.7633 12.3607 26.3303 12.237 25.8974 12.237H22.3099C21.444 12.237 20.6399 12.67 20.0833 13.3504C19.4029 14.2782 19.2792 14.6389 19.9595 15.6286Z" fill="currentColor"/>
                     </svg>
                   </div>
-                  <h3 class="mb-0">%95-100</h3>
+                  <h3 class="mb-0">{{ __('%95-100') }}</h3>
                   <p class="fw-medium mb-0">
-                    Kanserli Hücre Yakalama Başarısı<br />
-                    (Recall)
+                    {{ __('Kanserli Hücre Yakalama Başarısı') }}<br />
+                    {{ __('(Recall)') }}
                   </p>
                 </div>
               </div>
@@ -397,18 +385,18 @@
       <section id="landingTeam" class="section-py landing-team" style="padding-block: 3.3em">
         <div class="container">
           <h3 class="text-center mb-1">
-            <span class="position-relative fw-extrabold z-1">Takım
-              <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="laptop charging" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
+            <span class="position-relative fw-extrabold z-1">{{ __('Takım') }}
+              <img src="../../assets/img/front-pages/icons/section-title-icon.png" alt="{{ __('laptop charging') }}" class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
             </span>
           </h3>
           <p class="text-center pb-3">
-            Model Geliştirme, Yazılım Geliştirme, Tasarım ve Akademik süreçlere katkı sunan ekip üyeleri.
+            {{ __('Model Geliştirme, Yazılım Geliştirme, Tasarım ve Akademik süreçlere katkı sunan ekip üyeleri.') }}
           </p>
           <div class="row gy-4 mt-2">
             <!-- Üye 1 -->
             <div class="col-lg-4 col-sm-6">
               <div class="card border border-label-primary text-center p-6" style="border-radius: 0;">
-                <h5 class="fw-bold mb-1">Esila Tuğba GİDERBAŞ</h5>
+                <h5 class="fw-bold mb-1">{{ __('Esila Tuğba GİDERBAŞ') }}</h5>
                 {{-- <p class="text-body-secondary mb-0">Proje Yürütücüsü • AI Mimarisi</p> --}}
               </div>
             </div>
@@ -416,7 +404,7 @@
             <!-- Üye 2 -->
             <div class="col-lg-4 col-sm-6">
               <div class="card shadow border border-label-info text-center p-6" style="border-radius: 0;">
-                <h5 class="fw-bold mb-1">Sude TEKİNKOCA</h5>
+                <h5 class="fw-bold mb-1">{{ __('Sude TEKİNKOCA') }}</h5>
                 {{-- <p class="text-body-secondary mb-0">Model Eğitimi • Veri İşleme</p> --}}
               </div>
             </div>
@@ -424,7 +412,7 @@
             <!-- Üye 3 -->
             <div class="col-lg-4 col-sm-6">
               <div class="card shadow border border-label-danger text-center p-6" style="border-radius: 0;">
-                <h5 class="fw-bold mb-1">Berkay KARAMAN</h5>
+                <h5 class="fw-bold mb-1">{{ __('Berkay KARAMAN') }}</h5>
                 {{-- <p class="text-body-secondary mb-0">Web Arayüzü • API Entegrasyonu</p> --}}
               </div>
             </div>
@@ -441,7 +429,7 @@
       <div class="footer-top position-relative overflow-hidden z-1">
         <img
           src="../../assets/img/front-pages/backgrounds/footer-bg.png"
-          alt="footer bg"
+          alt="{{ __('footer bg') }}"
           class="footer-bg banner-bg-img z-n1" />
         <div class="container">
           <div class="row gx-0 gy-6 g-lg-10">
@@ -451,10 +439,10 @@
                   <img src="img/logo.png" alt="" width="40" height="40">
                   
                 </span>
-                <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">SG AI TEAM</span>
+                <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">{{ __('SG AI TEAM') }}</span>
               </a>
               <p class="footer-text footer-logo-description mb-6">
-                Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi
+                {{ __('Histopatolojik Görüntülerde Kanser Tespiti ve Açıklanabilir Yapay Zekâ (XAI) Destekli Karar Sistemi') }}
               </p>
               </form>
             </div>
@@ -470,7 +458,7 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-           Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından  <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">TÜBİTAK 2204-A</a> Yarışması için geliştirilmiştir.
+           {{ __('Bu proje Eskişehir Sabiha Gökçen MTAL öğrencileri tarafından') }} <a href="https://tubitak.gov.tr/tr/yarismalar/2204-lise-ogrencileri-arastirma-projeleri-yarismasi" target="_blank" class="fw-medium text-success">{{ __('TÜBİTAK 2204-A') }}</a> {{ __('Yarışması için geliştirilmiştir.') }}
           </div>
           <div>
             <a href="https://github.com/SGAITEAM/pathxai" class="me-1 text-white" target="_blank">
@@ -499,8 +487,8 @@
     <script src="../../assets/vendor/libs/nouislider/nouislider.js"></script>
     <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
     <!-- Main JS -->
-    <script src="../../assets/js/front-main.js"></script>
+    <!-- <script src="../../assets/js/front-main.js"></script> -->
     <!-- Page JS -->
-    <script src="../../assets/js/front-page-landing.js"></script>
+    <!-- <script src="../../assets/js/front-page-landing.js"></script> -->
   </body>
 </html>

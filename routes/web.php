@@ -37,6 +37,27 @@ Route::post('/predict/lung', [PredictController::class, 'predictLung'])->name('p
 Route::post('/predict/colon', [PredictController::class, 'predictColon'])->name('predictColon'); 
 
 
+// lang switch rotası
+Route::get('/lang/{locale}', function ($locale) {
+    abort_unless(in_array($locale, ['tr', 'en']), 404);
+
+    session(['locale' => $locale]);
+
+    return redirect('/');
+})->name('lang.switch');
+
+
+
+Route::get('/test-locale', function () {
+    return [
+        'session_locale' => session('locale'),
+        'app_locale' => app()->getLocale(),
+        'config_locale' => config('app.locale'),
+    ];
+});
+
+
+
 
 
 
